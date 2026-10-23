@@ -1,5 +1,6 @@
 import streamlit as st
 
+<<<<<<< Updated upstream
 st.set_page_config(
     page_title="Neutrix | Recovery Tracker",
     page_icon="📈",
@@ -40,3 +41,8 @@ if submitted:
         "Neutrix organizes recovery information. "
         "It does not diagnose or replace advice from a qualified doctor."
     )
+=======
+st.set_page_config(page_title='Neutrix | Recovery Tracker', page_icon='??')
+st.title('?? Recovery Tracker')
+st.info('Bobby is building this page. Check back soon!')
+>>>>>>> Stashed changes
