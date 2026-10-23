@@ -1,0 +1,10 @@
+PATIENT DISCHARGE SUMMARY
+Patient Name: John Doe
+Age: 45
+Diagnosis: Acute Appendicitis
+
+Prescription:
+1. Paracetamol 650mg - Twice daily after food (5 days)
+2. Amoxicillin 500mg - Three times daily (7 days)
+
+Follow-up in 1 week.
