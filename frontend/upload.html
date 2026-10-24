@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Neutrix | Upload Records</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>📄 Upload Medical Records</h1>
+        <p class="caption">Upload discharge summary, prescription, or lab report.</p>
+
+        <input type="file" id="docUploadInput" accept=".pdf">
+        <button id="extractBtn" style="margin-top: 15px;">Extract Text</button>
+
+        <div id="uploadStatus"></div>
+
+        <div id="extractionResults" class="hidden" style="margin-top: 25px;">
+            <h3>Extracted Text Result</h3>
+            <textarea id="extractedTextDisplay" rows="12" style="font-family: monospace;"></textarea>
+            <button id="downloadTxtBtn" style="background-color: #198754; margin-top:10px;">Download Extracted Text (.txt)</button>
+        </div>
+
+        <p style="margin-top:20px;"><a href="index.html">← Back to Dashboard</a></p>
+    </div>
+    <script src="upload.js"></script>
+</body>
+</html>

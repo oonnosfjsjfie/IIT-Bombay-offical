@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Neutrix | Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+    <script>
+        // Explicitly paths to look inside the frontend folder from the root server
+        if (localStorage.getItem('neutrix_authenticated') !== 'true') {
+            window.location.href = '/frontend/signin.html';
+        }
+    </script>
+</head>
+<body>
+    <div class="container" style="max-width: 800px;">
+        <p style="text-align: right;">
+            <a href="#" onclick="localStorage.removeItem('neutrix_authenticated'); window.location.reload();" style="color: #dc3545; font-weight: bold;">
+                🚪 Sign Out
+            </a>
+        </p>
+        <header style="border-bottom: 2px solid #ced4da; padding-bottom: 15px; margin-bottom: 20px;">
+            <h1>⚡ Neutrix</h1>
+            <p class="caption">By Team Neutrinos — Small signals. Clear recovery.</p>
+        </header>
+
+        <main>
+            <p style="font-size: 16px; line-height: 1.6;">
+                Welcome to your recovery hub. Choose an integrated panel from the grid workspace below to proceed across active module layers.
+            </p>
+
+            <!-- Complete Grid with paths pointed to the root server environment -->
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 30px;">
+                <a href="/frontend/summary.html" style="display:block; padding:15px; background:#e3f2fd; color:#0d6efd; text-decoration:none; border-radius:4px; font-weight:bold; text-align:center;">🧠 AI Discharge Summary (Ajay)</a>
+                <a href="/frontend/upload.html" style="display:block; padding:15px; background:#e3f2fd; color:#0d6efd; text-decoration:none; border-radius:4px; font-weight:bold; text-align:center;">📄 Upload Records (Lingesh)</a>
+                <a href="/frontend/medicine.html" style="display:block; padding:15px; background:#e3f2fd; color:#0d6efd; text-decoration:none; border-radius:4px; font-weight:bold; text-align:center;">💊 Medicine Plan (Lingesh)</a>
+                <a href="/frontend/tracker.html" style="display:block; padding:15px; background:#e3f2fd; color:#0d6efd; text-decoration:none; border-radius:4px; font-weight:bold; text-align:center;">📈 Recovery Tracker (Bobby)</a>
+                <a href="/frontend/warnings.html" style="display:block; padding:15px; background:#e3f2fd; color:#0d6efd; text-decoration:none; border-radius:4px; font-weight:bold; text-align:center;">⚠️ Warning Signs Triage (Bobby)</a>
+                <a href="/frontend/brief.html" style="display:block; padding:15px; background:#e3f2fd; color:#0d6efd; text-decoration:none; border-radius:4px; font-weight:bold; text-align:center;">🧑‍⚕️ Doctor Communication Brief (Bobby)</a>
+            </div>
+        </main>
+
+        <footer class="disclaimer" style="margin-top: 40px; border-top: 1px solid #dee2e6; padding-top: 15px; font-size: 13px; color: #6c757d;">
+            <p><em>Neutrix organizes and explains medical information. It does not diagnose, prescribe, or replace advice from a qualified doctor.</em></p>
+        </footer>
+    </div>
+</body>
+</html>

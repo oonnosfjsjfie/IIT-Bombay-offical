@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Neutrix | Doctor Portal</title>
+    <link rel="stylesheet" href="style.css">
+    <script>
+        // Security Access and Role Verification Wall
+        if (localStorage.getItem('neutrix_authenticated') !== 'true' || localStorage.getItem('neutrix_user_role') !== 'doctor') {
+            window.location.href = '/frontend/role.html';
+        }
+    </script>
+</head>
+<body>
+    <div class="container" style="max-width: 850px;">
+        <p style="text-align: right;"><a href="/frontend/role.html" style="font-weight: bold;">← Switch Role</a></p>
+        
+        <header style="border-bottom: 2px solid #ced4da; padding-bottom: 15px; margin-bottom: 20px;">
+            <h1>🧑‍⚕️ Clinical Consultation Hub</h1>
+            <p class="caption">Configure your medical profile and manage local hospital consultation areas.</p>
+        </header>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 25px;">
+            <!-- Left Side: Profile Creation Form Layout -->
+            <div>
+                <h3>Configure Doctor Profile</h3>
+                <form id="doctorProfileForm">
+                    <label for="docName">Doctor Name *</label>
+                    <input type="text" id="docName" placeholder="Dr. Alex Neutrino" required>
+
+                    <label for="docSpecialty">Medical Specialty</label>
+                    <input type="text" id="docSpecialty" placeholder="General Medicine / Cardiology">
+
+                    <label for="hospitalName">Affiliated Hospital Name *</label>
+                    <input type="text" id="hospitalName" placeholder="Kochi Medical Trust" required>
+
+                    <label for="hospitalCity">Operating City</label>
+                    <select id="hospitalCity">
+                        <option value="kochi">Kochi (Sample Center)</option>
+                        <option value="mumbai">Mumbai (Sample Center)</option>
+                    </select>
+
+                    <button type="submit">Save Professional Profile</button>
+                </form>
+                
+                <div id="docFeedback"></div>
+            </div>
+
+            <!-- Right Side: Local High-Tech Radar Canvas View -->
+            <div>
+                <h3>Hospital Consultation Map Mapping</h3>
+                <p class="caption" style="font-size: 13px;">Local secure rendering matrix framework.</p>
+                
+                <!-- Native Dynamic Drawing Container Element -->
+                <div style="position: relative; width: 100%; height: 320px; border-radius: 6px; border: 1px solid #ced4da; background: #e9ecef; overflow: hidden; box-shadow: inset 0 2px 4px rgba(0,0,0,0.05);">
+                    <canvas id="mockMapCanvas" width="400" height="320" style="width: 100%; height: 100%; display: block; background: #eef2f5;"></canvas>
+                </div>
+                
+                <div id="profileSummaryBox" class="hidden summary-box" style="border-left-color: #0d6efd;">
+                    <h4>### Registered Summary Profile</h4>
+                    <div id="summaryContent" style="font-size: 13.5px; line-height: 1.5;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="doctor.js"></script>
+</body>
+</html>
