@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Neutrix Health | Patient Portal</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Top Navigation Bar -->
+    <header class="ehr-navbar">
+        <div class="nav-container">
+            <div class="hospital-brand">
+                <span class="cross-icon">✚</span>
+                <div class="brand-text">
+                    <span class="brand-title" id="txt-brand-title">NEUTRIX HEALTH</span>
+                    <span class="brand-sub" id="txt-brand-sub">Post-Discharge Patient Portal</span>
+                </div>
+            </div>
+            
+            <div class="system-controls">
+                <!-- Theme & Language Utilities -->
+                <button type="button" class="ctrl-btn" id="themeToggleBtn" title="Toggle Theme">
+                    <span id="themeIcon">🌙</span> <span id="txt-theme">Dark Mode</span>
+                </button>
+                
+                <button type="button" class="ctrl-btn" id="langToggleBtn" title="Switch Language">
+                    🌐 <span id="txt-lang-btn">മലയാളം</span>
+                </button>
+
+                <button type="button" class="btn-meta highlight" id="printCardBtn">🪪 <span id="txt-print-card">Print Recovery ID</span></button>
+                <button type="button" class="btn-meta" id="printBtn">📄 <span id="txt-print">Print Chart</span></button>
+                <button type="button" class="btn-meta danger" id="resetBtn">🔄 <span id="txt-reset">Reset Form</span></button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Workspace -->
+    <main class="ehr-workspace">
+        <!-- Intake Form Section -->
+        <section class="ehr-card intake-card">
+            <div class="card-header">
+                <div>
+                    <h2 id="txt-header-title">Patient Intake & Caregiver Registration</h2>
+                    <p class="subtitle" id="txt-header-sub">Complete clinical baseline parameters for post-discharge care management.</p>
+                </div>
+                <span class="form-status" id="txt-status">Draft</span>
+            </div>
+
+            <!-- Profile Completion Progress Bar -->
+            <div class="progress-section">
+                <div class="progress-info">
+                    <span class="progress-label" id="txt-progress-label">Profile Completion</span>
+                    <span class="progress-percentage" id="progressPercent">0%</span>
+                </div>
+                <div class="progress-bar-bg">
+                    <div class="progress-bar-fill" id="progressBarFill"></div>
+                </div>
+            </div>
+
+            <!-- Timeline Tab Stepper Bar -->
+            <nav class="timeline-stepper" role="tablist">
+                <div class="timeline-line-bg">
+                    <div class="timeline-line-fill" id="timelineLineFill"></div>
+                </div>
+
+                <button type="button" class="step-node active" data-tab="tab-demographics">
+                    <span class="node-icon">👤</span>
+                    <span class="node-text" id="tab-title-1">Patient Information</span>
+                </button>
+                <button type="button" class="step-node" data-tab="tab-clinical">
+                    <span class="node-icon">📋</span>
+                    <span class="node-text" id="tab-title-2">Medical Baseline</span>
+                </button>
+                <button type="button" class="step-node" data-tab="tab-caregiver">
+                    <span class="node-icon">🤝</span>
+                    <span class="node-text" id="tab-title-3">Caregiver & Support</span>
+                </button>
+            </nav>
+
+            <form id="profileForm" novalidate>
+                <div class="tab-viewport">
+                    <!-- TAB 1: Patient Information -->
+                    <div class="tab-pane active" id="tab-demographics">
+                        <div class="section-title" id="txt-sec-1">1. Patient Information</div>
+
+                        <!-- Profile Photo Upload Block -->
+                        <div class="avatar-upload-container">
+                            <div class="avatar-preview-box">
+                                <img id="avatarImage" src="" alt="Profile Preview" class="hidden">
+                                <span id="avatarPlaceholder" class="avatar-initial">P</span>
+                            </div>
+                            <div class="avatar-upload-controls">
+                                <label for="profilePicInput" class="btn-secondary btn-upload" id="txt-upload-btn">📷 Upload Profile Photo</label>
+                                <input type="file" id="profilePicInput" accept="image/*" class="hidden-file-input">
+                                <button type="button" id="removePicBtn" class="btn-text danger hidden" id="txt-remove-photo">Remove Photo</button>
+                                <p class="hint" id="txt-photo-hint">Supported formats: JPG, PNG, WEBP (Max size: 2MB)</p>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="patientName"><span id="lbl-patient-name">Full Legal Name</span> <span class="req">*</span></label>
+                            <input type="text" id="patientName" class="modern-input" placeholder="e.g. Ananya Nair" required>
+                        </div>
+
+                        <div class="form-grid-3">
+                            <div class="form-group">
+                                <label for="age" id="lbl-age">Age (Years)</label>
+                                <input type="number" id="age" class="modern-input" min="1" max="120" value="25">
+                            </div>
+                            <div class="form-group">
+                                <label for="gender" id="lbl-gender">Gender</label>
+                                <select id="gender" class="modern-select">
+                                    <option value="Female">Female</option>
+                                    <option value="Male">Male</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="bloodGroup" id="lbl-blood">Blood Group</label>
+                                <select id="bloodGroup" class="modern-select">
+                                    <option value="Select">Select</option>
+                                    <option value="O+">O+</option>
+                                    <option value="A+">A+</option>
+                                    <option value="B+">B+</option>
+                                    <option value="AB+">AB+</option>
+                                    <option value="O-">O-</option>
+                                    <option value="A-">A-</option>
+                                    <option value="B-">B-</option>
+                                    <option value="AB-">AB-</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="tab-actions end">
+                            <button type="button" class="btn-primary next-tab" data-next="tab-clinical" id="btn-next-1">Proceed to Medical Baseline →</button>
+                        </div>
+                    </div>
+
+                    <!-- TAB 2: Medical Baseline -->
+                    <div class="tab-pane" id="tab-clinical">
+                        <div class="section-title" id="txt-sec-2">2. Pre-Existing Conditions & Medications</div>
+
+                        <!-- Conditions Dropdown -->
+                        <div class="form-group">
+                            <label for="conditions" id="lbl-conditions">Primary Pre-Existing Medical Condition</label>
+                            <select id="conditions" class="modern-select">
+                                <option value="None">None / Fully Healthy</option>
+                                <optgroup label="Cardiovascular">
+                                    <option value="Hypertension (High BP)">Hypertension (High Blood Pressure)</option>
+                                    <option value="Ischemic Heart Disease">Ischemic Heart Disease / CAD</option>
+                                    <option value="Heart Failure">Heart Failure</option>
+                                    <option value="Arrhythmia">Arrhythmia</option>
+                                </optgroup>
+                                <optgroup label="Endocrine & Metabolic">
+                                    <option value="Type 1 Diabetes Mellitus">Type 1 Diabetes Mellitus</option>
+                                    <option value="Type 2 Diabetes Mellitus">Type 2 Diabetes Mellitus</option>
+                                    <option value="Hypothyroidism">Hypothyroidism</option>
+                                    <option value="Hyperthyroidism">Hyperthyroidism</option>
+                                    <option value="High Cholesterol">Hyperlipidemia (High Cholesterol)</option>
+                                </optgroup>
+                                <optgroup label="Respiratory">
+                                    <option value="Bronchial Asthma">Bronchial Asthma</option>
+                                    <option value="COPD">COPD (Chronic Bronchitis)</option>
+                                    <option value="Allergies / Rhinitis">Allergic Rhinitis</option>
+                                </optgroup>
+                                <optgroup label="Renal & Hepatic">
+                                    <option value="Chronic Kidney Disease">Chronic Kidney Disease (CKD)</option>
+                                    <option value="Fatty Liver Disease">Fatty Liver Disease</option>
+                                </optgroup>
+                                <optgroup label="Neurological & Other">
+                                    <option value="Stroke / TIA">Stroke / TIA</option>
+                                    <option value="Epilepsy / Seizures">Epilepsy / Seizures</option>
+                                    <option value="Rheumatoid Arthritis">Rheumatoid Arthritis</option>
+                                    <option value="Other / Multiple">Other / Multiple Conditions</option>
+                                </optgroup>
+                            </select>
+                        </div>
+
+                        <!-- Allergies -->
+                        <div class="form-group">
+                            <label for="allergies" id="lbl-allergies">Known Adverse Drug Reactions & Allergies</label>
+                            <textarea id="allergies" class="modern-textarea" rows="2" placeholder="List known allergies..."></textarea>
+                            
+                            <div class="quick-pills-wrapper">
+                                <span class="pills-label" id="txt-quick-allergies">Click to quick-add common allergies:</span>
+                                <div class="pills-container">
+                                    <button type="button" class="allergy-chip" data-allergy="Penicillin">💊 Penicillin</button>
+                                    <button type="button" class="allergy-chip" data-allergy="Aspirin / NSAIDs">💊 Aspirin / NSAIDs</button>
+                                    <button type="button" class="allergy-chip" data-allergy="Peanuts / Nuts">🥜 Peanuts / Tree Nuts</button>
+                                    <button type="button" class="allergy-chip" data-allergy="Dust & Pollen">🌾 Dust / Pollen</button>
+                                    <button type="button" class="allergy-chip" data-allergy="Latex">🧤 Latex</button>
+                                    <button type="button" class="allergy-chip" data-allergy="Seafood">🦐 Seafood</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Prescription Builder -->
+                        <div class="form-group">
+                            <label id="lbl-meds-title">Routine Daily Prescription Medications</label>
+                            <p class="hint" id="txt-meds-hint">Add daily medicines broken down by name, time, and dosage.</p>
+                            
+                            <div id="medicationList" class="medication-builder">
+                                <div class="med-row">
+                                    <input type="text" class="modern-input med-name" placeholder="Medication Name (e.g. Paracetamol)">
+                                    <select class="modern-select med-time">
+                                        <option value="Morning (Breakfast)">Morning (Breakfast)</option>
+                                        <option value="Afternoon (Lunch)">Afternoon (Lunch)</option>
+                                        <option value="Night (Dinner)">Night (Dinner)</option>
+                                        <option value="Twice Daily (Morning & Night)">Twice Daily</option>
+                                        <option value="Three Times Daily">Three Times Daily</option>
+                                        <option value="As Needed (PRN)">As Needed (PRN)</option>
+                                    </select>
+                                    <input type="text" class="modern-input med-dose" placeholder="Dosage (e.g. 500mg - 1 tab)">
+                                    <button type="button" class="btn-icon remove-med-btn" title="Remove Prescription">✕</button>
+                                </div>
+                            </div>
+
+                            <button type="button" id="addMedBtn" class="btn-secondary btn-sm">+ <span id="txt-add-med">Add Another Medication</span></button>
+                        </div>
+
+                        <div class="tab-actions space-between">
+                            <button type="button" class="btn-secondary prev-tab" data-prev="tab-demographics" id="btn-back-1">← Back to Demographics</button>
+                            <button type="button" class="btn-primary next-tab" data-next="tab-caregiver" id="btn-next-2">Proceed to Caregiver Setup →</button>
+                        </div>
+                    </div>
+
+                    <!-- TAB 3: Caregiver & Support -->
+                    <div class="tab-pane" id="tab-caregiver">
+                        <div class="section-title" id="txt-sec-3">3. Designated Caregiver & Communication</div>
+
+                        <div class="form-group">
+                            <label for="caregiverName"><span id="lbl-caregiver-name">Primary Caregiver Name</span> <span class="req">*</span></label>
+                            <input type="text" id="caregiverName" class="modern-input" placeholder="e.g. Rahul Nair" required>
+                        </div>
+
+                        <div class="form-grid-2">
+                            <div class="form-group">
+                                <label for="caregiverPhone" id="lbl-caregiver-phone">Primary Contact Phone</label>
+                                <input type="tel" id="caregiverPhone" class="modern-input" placeholder="+91 98765 43210">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="language" id="lbl-language">Care Summary Output Language</label>
+                                <select id="language" class="modern-select">
+                                    <option value="English">English</option>
+                                    <option value="Malayalam">Malayalam (മലയാളം)</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="tab-actions space-between">
+                            <button type="button" class="btn-secondary prev-tab" data-prev="tab-clinical" id="btn-back-2">← Back to Medical Baseline</button>
+                            <button type="submit" class="btn-success" id="btn-save-final">💾 Save & Sync Hospital Record</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+
+            <div id="messageArea"></div>
+        </section>
+
+        <!-- Live Patient Chart Side Preview -->
+        <aside class="ehr-card chart-card">
+            <div class="chart-header">
+                <h3 id="txt-chart-title">CLINICAL CHART PREVIEW</h3>
+                <span class="mrn-badge" id="mrnDisplay">MRN: #NX-84920</span>
+            </div>
+
+            <div class="chart-patient-header">
+                <div class="patient-avatar-box">
+                    <img id="chartAvatarImage" src="" alt="Avatar" class="chart-avatar-img hidden">
+                    <div class="patient-avatar" id="avatarLetter">P</div>
+                </div>
+                <div class="patient-title-block">
+                    <h3 id="prevName">Unregistered Patient</h3>
+                    <p id="prevMeta" class="patient-meta">Age -- • Gender -- • Blood --</p>
+                </div>
+            </div>
+
+            <div class="chart-divider"></div>
+
+            <div class="clinical-field">
+                <span class="field-label" id="txt-chart-cond">Pre-Existing Condition</span>
+                <div id="prevConditions" class="tag-container">
+                    <span class="clinical-tag">None</span>
+                </div>
+            </div>
+
+            <div class="clinical-field">
+                <span class="field-label" id="txt-chart-allergies">Adverse Drug Reactions / Allergies</span>
+                <p id="prevAllergies" class="field-value text-alert">None reported</p>
+            </div>
+
+            <div class="clinical-field">
+                <span class="field-label" id="txt-chart-meds">Daily Maintenance Medications</span>
+                <div id="prevMedsContainer" class="meds-preview-list">
+                    <p class="field-value">None reported</p>
+                </div>
+            </div>
+
+            <div class="clinical-field caregiver-alert-box">
+                <span class="field-label" id="txt-chart-caregiver">Primary Caregiver Contact</span>
+                <p id="prevCaregiver" class="caregiver-name">Not Set</p>
+                <p id="prevPhone" class="caregiver-phone">--</p>
+            </div>
+
+            <div class="clinical-field">
+                <span class="field-label" id="txt-chart-lang">Summary Language</span>
+                <p id="prevLang" class="field-value highlight">English</p>
+            </div>
+
+            <button type="button" class="btn-primary card-action-btn" id="sidePrintCardBtn">🪪 Print Patient Emergency ID Card</button>
+
+            <footer class="ehr-disclaimer">
+                <p id="txt-disclaimer">🔒 <strong>Neutrix Hospital Protocol:</strong> This profile establishes baseline recovery parameters. Data is saved locally for post-discharge care monitoring.</p>
+            </footer>
+        </aside>
+    </main>
+
+    <!-- Printable Emergency Recovery ID Card Container (Hidden on Web View) -->
+    <div id="printableCardContainer" class="printable-card-wrapper hidden">
+        <div class="recovery-id-card">
+            <div class="id-header">
+                <div class="id-brand">
+                    <span class="cross-icon">✚</span>
+                    <div>
+                        <h4>NEUTRIX HEALTH</h4>
+                        <small>POST-DISCHARGE EMERGENCY CARD</small>
+                    </div>
+                </div>
+                <div class="id-mrn" id="cardMrn">MRN: #NX-84920</div>
+            </div>
+
+            <div class="id-body">
+                <div class="id-photo-box">
+                    <img id="cardPhotoImg" src="" class="hidden" alt="Photo">
+                    <div id="cardPhotoLetter" class="id-photo-letter">P</div>
+                </div>
+                <div class="id-details">
+                    <h3 id="cardPatientName">PATIENT NAME</h3>
+                    <p class="id-sub-meta" id="cardPatientMeta">Age: -- | Gender: -- | Blood: --</p>
+                    <div class="id-field">
+                        <strong>EMERGENCY CAREGIVER:</strong>
+                        <span id="cardCaregiver">Not Set</span> (<span id="cardPhone">--</span>)
+                    </div>
+                    <div class="id-field">
+                        <strong>KNOWN ALLERGIES:</strong>
+                        <span id="cardAllergies" class="text-danger">None reported</span>
+                    </div>
+                    <div class="id-field">
+                        <strong>PRIMARY CONDITION:</strong>
+                        <span id="cardCondition">None</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="id-footer">
+                <span>Language: <strong id="cardLanguage">English</strong></span>
+                <span>In emergency, present this card to clinical staff.</span>
+            </div>
+        </div>
+    </div>
+
+    <script src="profile.js"></script>
+</body>
+</html>
