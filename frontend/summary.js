@@ -1,30 +1,36 @@
-// The raw PDF text is kept here (not shown) so the chat can use it
-window.neutrixReportText = "";
+const openLastBtn = document.getElementById('openLastBtn');
+if (storeGet('neutrixReport')) openLastBtn.classList.remove('hidden');
+openLastBtn.addEventListener('click', () => {
+    window.location.href = 'report.html';
+});
 
 document.getElementById('processBtn').addEventListener('click', async () => {
-    const fileInput = document.getElementById('pdfFile');
-    const langSelect = document.getElementById('langSelect').value;
+    const processBtn = document.getElementById('processBtn');
+    const reports = window.neutrixUploads.pdf;
+    const bills = window.neutrixUploads.bill;
+    const language = window.neutrixLang;
     const resultOutput = document.getElementById('resultOutput');
     const aiTextResponse = document.getElementById('aiTextResponse');
 
-    if (fileInput.files.length === 0) {
+    if (reports.length === 0) {
         showStatus('warning', 'noFile');
         return;
     }
 
     const formData = new FormData();
-    formData.append("file", fileInput.files[0]);
-    formData.append("language", langSelect);
+    reports.forEach(file => formData.append("files", file));
+    bills.forEach(file => formData.append("bills", file));
+    formData.append("language", language);
 
-    // Loading state
     showStatus('info', 'loading');
     resultOutput.classList.add('hidden');
+    processBtn.disabled = true;
 
     const controller = new AbortController();
-    const timer = setTimeout(() => controller.abort(), 90000);
+    const timer = setTimeout(() => controller.abort(), 120000);
 
     try {
-        const response = await fetch('http://127.0.0.1:8000/api/summarize', {
+        const response = await fetch(`${API_BASE}/api/summarize`, {
             method: 'POST',
             body: formData,
             signal: controller.signal
@@ -37,14 +43,33 @@ document.getElementById('processBtn').addEventListener('click', async () => {
 
         const data = await response.json();
 
-        // Save the raw text for the chat
-        window.neutrixReportText = data.transcription || "";
+        if (data.ok === false) {
+            showStatus('error', 'rawMsg', { msg: data.summary });
+            return;
+        }
 
-        showStatus('success', 'success');
+        const record = {
+            summaries: { [language]: data.summary },
+            reportText: data.transcription || "",
+            billText: data.bill_text || "",
+            language: language,
+            dischargeName: reports.map(f => f.name).join(', '),
+            billName: bills.map(f => f.name).join(', '),
+            createdAt: new Date().toISOString()
+        };
 
-        // Show the AI summary, nicely formatted
-        aiTextResponse.innerHTML = window.renderMarkdown(data.summary);
-        resultOutput.classList.remove('hidden');
+        if (storeSet('neutrixReport', record)) {
+            try {
+                localStorage.removeItem('neutrixPlan');
+                localStorage.removeItem('neutrixCheckups');
+            } catch (e) {}
+            showStatus('success', 'redirecting');
+            setTimeout(() => { window.location.href = 'report.html'; }, 700);
+        } else {
+            showStatus('warning', 'storageFail');
+            aiTextResponse.innerHTML = renderMarkdown(data.summary);
+            resultOutput.classList.remove('hidden');
+        }
 
     } catch (err) {
         clearTimeout(timer);
@@ -53,5 +78,7 @@ document.getElementById('processBtn').addEventListener('click', async () => {
         } else {
             showStatus('error', 'serverError', { msg: err.message });
         }
+    } finally {
+        processBtn.disabled = false;
     }
 });
