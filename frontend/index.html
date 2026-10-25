@@ -13,19 +13,20 @@
     </script>
 </head>
 <body>
-    <!-- Locate this container block line inside frontend/index.html and update the inline style metrics: -->
-<div class="container" style="max-width: 850px; margin: 60px auto; background: #ffffff; padding: 40px; border-radius: 12px; box-shadow: 0 8px 24px rgba(149, 157, 165, 0.08); border: 1px solid #e9ecef;">
-
+    <!-- Premium Padded Centered Container Panel Layout -->
+    <div class="container" style="max-width: 850px; margin: 60px auto; background: #ffffff; padding: 40px; border-radius: 12px; box-shadow: 0 8px 24px rgba(149, 157, 165, 0.08); border: 1px solid #e9ecef;">
+        
         <p style="text-align: right;">
             <a href="#" onclick="localStorage.removeItem('neutrix_authenticated'); window.location.reload();" style="color: #dc3545; font-weight: bold; text-decoration: none;">🚪 Sign Out</a>
         </p>
+        
         <header style="border-bottom: 2px solid #ced4da; padding-bottom: 15px; margin-bottom: 20px;">
             <h1>⚡ Neutrix Dashboard</h1>
             <p class="caption">Welcome Back, <span id="welcomePatientName" style="color:#0d6efd; font-weight:bold;">User</span>! 👋 — Small signals. Clear recovery.</p>
         </header>
         
         <main>
-            <!-- Symmetrical Core Navigation Grid Pointing Directly to Merged Team Features -->
+            <!-- Integrated Master Navigation Grid Module Routing -->
             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 30px;">
                 <!-- Ajay's Clustered AI Report Upload Portal Engine -->
                 <a href="report.html" style="display:block; padding:15px; background:#e3f2fd; color:#0d6efd; text-decoration:none; border-radius:4px; font-weight:bold; text-align:center;">🧠 AI Discharge Summary (Ajay)</a>
@@ -42,14 +43,14 @@
                 <!-- Lingesh Local Persistent Medication Regimen Array Panel -->
                 <a href="medicine.html" style="display:block; padding:15px; background:#e3f2fd; color:#0d6efd; text-decoration:none; border-radius:4px; font-weight:bold; text-align:center;">🧪 Local Medicine Manual Track (Lingesh)</a>
                 
-                <!-- Bobby's Daily Critical Patient Recovery Telemetry Metrics Board -->
-                <a href="tracker.html" style="display:block; padding:15px; background:#e3f2fd; color:#0d6efd; text-decoration:none; border-radius:4px; font-weight:bold; text-align:center;">📈 Recovery Tracker (Bobby)</a>
+                <!-- Bobby's Daily Critical Patient Recovery Telemetry Metrics Board (Mapped) -->
+                <a href="tracking.html" style="display:block; padding:15px; background:#e3f2fd; color:#0d6efd; text-decoration:none; border-radius:4px; font-weight:bold; text-align:center;">📈 Recovery Tracker (Bobby)</a>
                 
                 <!-- Bobby's Automated Symptom Triage Danger Signs Flag Screener -->
                 <a href="warnings.html" style="display:block; padding:15px; background:#e3f2fd; color:#0d6efd; text-decoration:none; border-radius:4px; font-weight:bold; text-align:center;">⚠️ Warning Signs Triage (Bobby)</a>
                 
-                <!-- Bobby's Clinical Consultation Outpatient Message Formatter -->
-                <a href="brief.html" style="display:block; padding:15px; background:#e3f2fd; color:#0d6efd; text-decoration:none; border-radius:4px; font-weight:bold; text-align:center;">🧑‍⚕️ Doctor Communication Brief (Bobby)</a>
+                <!-- Bobby's Clinical Consultation Outpatient Message Formatter (Mapped) -->
+                <a href="briefing.html" style="display:block; padding:15px; background:#e3f2fd; color:#0d6efd; text-decoration:none; border-radius:4px; font-weight:bold; text-align:center;">🧑‍⚕️ Doctor Communication Brief (Bobby)</a>
             </div>
         </main>
         
@@ -58,7 +59,7 @@
         </footer>
     </div>
 
-    <!-- Background Logic Injecting Patient Profile Custom Greetings -->
+    <!-- Background Cache Logic Injecting Patient Profile Greetings -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const storedPatientName = localStorage.getItem('neutrix_patient_name') || "User";
