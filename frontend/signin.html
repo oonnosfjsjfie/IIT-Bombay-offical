@@ -3,31 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Neutrix | Sign In</title>
-    <link rel="stylesheet" href="style.css"> <!-- Reuses your core application styling -->
+    <title>Neutrix | Portal Sign In</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="container" style="max-width: 400px; margin: 100px auto;">
-        <div style="text-align: center; margin-bottom: 25px;">
-            <h1>⚡ Neutrix</h1>
-            <p class="caption">Secure Portal Access</p>
+    <!-- Premium Card wrapper designed to match Adam's form containers perfectly -->
+    <div class="container" style="max-width: 480px; margin: 100px auto; background: #ffffff; padding: 40px; border-radius: 12px; box-shadow: 0 8px 24px rgba(149, 157, 165, 0.15); border: 1px solid #e9ecef;">
+        <div style="text-align: center; margin-bottom: 35px;">
+            <div style="display: inline-flex; align-items: center; justify-content: center; width: 50px; height: 50px; background: #e3f2fd; color: #0d6efd; border-radius: 50%; font-size: 24px; font-weight: bold; margin-bottom: 15px;">⚡</div>
+            <h1 style="color: #0c2340; font-size: 26px; font-weight: 700; margin: 0; letter-spacing: -0.5px;">NEUTRIX HEALTH</h1>
+            <p class="caption" style="margin: 5px 0 0 0; font-size: 14px; color: #6c757d;">Secure Clinical Ingest Portal Access</p>
         </div>
 
         <form id="loginForm">
-            <label for="userEmail">Email Address</label>
-            <input type="email" id="userEmail" placeholder="name@domain.com" required>
+            <div style="margin-bottom: 20px;">
+                <label for="userEmail" style="display: block; margin-bottom: 8px; font-weight: 600; font-size: 13px; color: #344054; text-transform: uppercase; letter-spacing: 0.5px;">Email Address *</label>
+                <input type="email" id="userEmail" placeholder="team@neutrinos.com" style="width: 100%; padding: 12px; border: 1px solid #d0d5dd; border-radius: 8px; font-size: 14px; box-sizing: border-box; background: #fcfcfc;" required>
+            </div>
 
-            <label for="userPassword">Password</label>
-            <input type="password" id="userPassword" placeholder="••••••••" required>
+            <div style="margin-bottom: 25px;">
+                <label for="userPassword" style="display: block; margin-bottom: 8px; font-weight: 600; font-size: 13px; color: #344054; text-transform: uppercase; letter-spacing: 0.5px;">Password *</label>
+                <input type="password" id="userPassword" placeholder="••••••••" style="width: 100%; padding: 12px; border: 1px solid #d0d5dd; border-radius: 8px; font-size: 14px; box-sizing: border-box; background: #fcfcfc;" required>
+            </div>
 
-            <button type="submit" style="margin-top: 25px;">Sign In</button>
+            <button type="submit" style="width: 100%; padding: 14px; background: #0d6efd; color: white; border: none; border-radius: 8px; font-size: 16px; font-weight: 600; cursor: pointer; transition: background 0.2s;">Sign In to Workspace</button>
         </form>
 
         <div id="loginFeedback"></div>
-
-        <footer class="disclaimer" style="text-align: center; margin-top: 30px;">
-            <p>Protected by Neutrix Core Security Layouts.</p>
-        </footer>
     </div>
     <script src="signin.js"></script>
 </body>

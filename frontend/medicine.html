@@ -2,46 +2,32 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Neutrix | Medicine Plan</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="container">
         <h1>💊 Medicine Plan</h1>
-        <p class="caption">Add prescriptions and track your daily dosing schedule schedules.</p>
-        
+        <p class="caption">Review auto-extracted prescriptions or add daily dosing tracking adjustments manually.</p>
         <form id="medForm">
-            <h3>Add Medicine</h3>
             <label for="medName">Medicine Name</label>
             <input type="text" id="medName" required>
-
             <label for="medDose">Dose</label>
             <input type="text" id="medDose" placeholder="e.g. 1 Tablet" required>
-
-            <label for="medTime">Scheduled Intake Time</label>
+            <label for="medTime">Scheduled Time</label>
             <input type="time" id="medTime" required>
-
             <label for="medFood">Food Instruction</label>
             <select id="medFood">
-                <option value="Before Food">Before Food</option>
                 <option value="After Food">After Food</option>
-                <option value="Any Time">Any Time</option>
+                <option value="Before Food">Before Food</option>
             </select>
-
             <label for="medDuration">Duration (Days)</label>
-            <input type="number" id="medDuration" min="1" max="365" value="7">
-
-            <button type="submit">Add Medicine</button>
+            <input type="number" id="medDuration" value="7">
+            <button type="submit">Add Medicine Record</button>
         </form>
-
-        <h3 style="margin-top: 30px;">Your Medicine Schedule</h3>
+        <h3>Your Active Medicine Schedule</h3>
         <div id="medScheduleList"></div>
-
-        <footer class="disclaimer">
-            <p><em>Neutrix organizes prescribed medicine information. It does not prescribe or alter doses. Always confirm details against physical printed labels.</em></p>
-        </footer>
-        <p style="margin-top: 20px;"><a href="index.html">← Back to Dashboard</a></p>
+        <p style="margin-top:20px;"><a href="index.html">← Back to Dashboard</a></p>
     </div>
     <script src="medicine.js"></script>
 </body>

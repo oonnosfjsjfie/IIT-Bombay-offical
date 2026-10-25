@@ -1,148 +1,3 @@
-HEAD
-/* Base Web Layout Reset */
-body {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-    background-color: #f8f9fa;
-    color: #212529;
-    padding: 20px;
-    margin: 0;
-}
-
-/* Central Content Container Card */
-.container {
-    max-width: 650px;
-    margin: 40px auto;
-    background: #ffffff;
-    padding: 30px;
-    border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-}
-
-/* Typography Details */
-h1 {
-    color: #0d6efd;
-    margin-top: 0;
-    font-size: 28px;
-}
-
-h3 {
-    color: #495057;
-    border-bottom: 2px solid #dee2e6;
-    padding-bottom: 8px;
-    margin-top: 25px;
-}
-
-.caption {
-    color: #6c757d;
-    font-size: 15px;
-    margin-bottom: 25px;
-}
-
-/* Form Controls and Inputs */
-label {
-    display: block;
-    margin-top: 15px;
-    font-weight: 600;
-    font-size: 14px;
-}
-
-input, select, textarea {
-    width: 100%;
-    padding: 10px;
-    margin-top: 6px;
-    border: 1px solid #ced4da;
-    border-radius: 4px;
-    box-sizing: border-box;
-    font-size: 14px;
-    background-color: #fff;
-}
-
-input:focus, select:focus, textarea:focus {
-    outline: none;
-    border-color: #86b7fe;
-    box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
-}
-
-/* Master Grid Action Buttons */
-button {
-    background-color: #0d6efd;
-    color: white;
-    padding: 12px 20px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    margin-top: 20px;
-    width: 100%;
-    font-size: 16px;
-    font-weight: 500;
-    transition: background-color 0.2s ease;
-}
-
-button:hover {
-    background-color: #0b5ed7;
-}
-
-/* Interactive Feedback Banners */
-.alert-success {
-    background-color: #d1e7dd;
-    color: #0f5132;
-    padding: 15px;
-    border-radius: 4px;
-    margin-top: 20px;
-    border: 1px solid #badbcc;
-}
-
-.alert-warning {
-    background-color: #fff3cd;
-    color: #664d03;
-    padding: 15px;
-    border-radius: 4px;
-    margin-top: 20px;
-    border: 1px solid #ffecb5;
-}
-
-.alert-danger {
-    background-color: #f8d7da;
-    color: #842029;
-    padding: 15px;
-    border-radius: 4px;
-    margin-top: 20px;
-    border: 1px solid #f5c2c7;
-}
-
-/* Content Blocks and Lists */
-.summary-box {
-    background-color: #f1f3f5;
-    padding: 20px;
-    border-radius: 4px;
-    margin-top: 20px;
-    border-left: 5px solid #6c757d;
-}
-
-.hidden {
-    display: none !important;
-}
-
-/* Persistent Dashboard Navigation Matrix Link Styling */
-a {
-    color: #0d6efd;
-    text-decoration: none;
-    font-size: 14px;
-}
-
-a:hover {
-    text-decoration: underline;
-}
-
-/* Shared Professional System Disclaimer */
-.disclaimer {
-    margin-top: 35px;
-    border-top: 1px solid #dee2e6;
-    padding-top: 15px;
-    font-size: 13px;
-    color: #6c757d;
-    line-height: 1.5;
-}
 /* Color Systems: Light Theme (Default) */
 :root {
     --hospital-navy: #0f172a;
@@ -165,6 +20,7 @@ a:hover {
     --shadow-md: 0 8px 24px rgba(15, 23, 42, 0.08);
 }
 
+
 /* Dark Theme Overrides */
 [data-theme="dark"] {
     --hospital-navy: #020617;
@@ -183,11 +39,13 @@ a:hover {
     --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.4);
 }
 
+
 * {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
 }
+
 
 body {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
@@ -197,6 +55,7 @@ body {
     transition: background-color 0.3s ease, color 0.3s ease;
 }
 
+
 /* Header & Controls */
 .ehr-navbar {
     background: var(--hospital-navy);
@@ -204,6 +63,7 @@ body {
     border-bottom: 4px solid var(--hospital-teal);
     padding: 16px 32px;
 }
+
 
 .nav-container {
     max-width: 1400px;
@@ -215,11 +75,13 @@ body {
     gap: 16px;
 }
 
+
 .hospital-brand {
     display: flex;
     align-items: center;
     gap: 14px;
 }
+
 
 .cross-icon {
     background: var(--hospital-teal);
@@ -234,10 +96,12 @@ body {
     font-weight: bold;
 }
 
+
 .brand-text {
     display: flex;
     flex-direction: column;
 }
+
 
 .brand-title {
     font-weight: 800;
@@ -245,10 +109,12 @@ body {
     letter-spacing: 1px;
 }
 
+
 .brand-sub {
     font-size: 12px;
     color: #94a3b8;
 }
+
 
 .system-controls {
     display: flex;
@@ -256,6 +122,7 @@ body {
     gap: 10px;
     flex-wrap: wrap;
 }
+
 
 .ctrl-btn, .btn-meta {
     background: #ffffff;
@@ -269,25 +136,30 @@ body {
     transition: all 0.2s ease;
 }
 
+
 [data-theme="dark"] .ctrl-btn {
     background: #334155;
     color: #f8fafc;
 }
+
 
 .btn-meta.highlight {
     background: var(--hospital-teal);
     color: #ffffff;
 }
 
+
 .ctrl-btn:hover, .btn-meta:hover {
     transform: translateY(-1px);
     opacity: 0.9;
 }
 
+
 .btn-meta.danger {
     background: #ef4444;
     color: #ffffff;
 }
+
 
 /* Workspace Grid */
 .ehr-workspace {
@@ -299,11 +171,13 @@ body {
     gap: 32px;
 }
 
+
 @media (max-width: 1024px) {
     .ehr-workspace {
         grid-template-columns: 1fr;
     }
 }
+
 
 .ehr-card {
     background: var(--card-bg);
@@ -314,6 +188,7 @@ body {
     transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
+
 .card-header {
     display: flex;
     justify-content: space-between;
@@ -323,16 +198,19 @@ body {
     margin-bottom: 20px;
 }
 
+
 .card-header h2 {
     font-size: 22px;
     color: var(--text-primary);
     font-weight: 700;
 }
 
+
 .subtitle {
     font-size: 14px;
     color: var(--text-secondary);
 }
+
 
 .form-status {
     font-size: 12px;
@@ -344,10 +222,12 @@ body {
     text-transform: uppercase;
 }
 
+
 /* Progress Bar Component */
 .progress-section {
     margin-bottom: 24px;
 }
+
 
 .progress-info {
     display: flex;
@@ -358,9 +238,11 @@ body {
     color: var(--text-secondary);
 }
 
+
 .progress-percentage {
     color: var(--hospital-teal);
 }
+
 
 .progress-bar-bg {
     width: 100%;
@@ -370,12 +252,14 @@ body {
     overflow: hidden;
 }
 
+
 .progress-bar-fill {
     width: 0%;
     height: 100%;
     background: linear-gradient(90deg, var(--hospital-indigo), var(--hospital-teal));
     transition: width 0.4s ease-out;
 }
+
 
 /* Timeline Stepper Component */
 .timeline-stepper {
@@ -387,6 +271,7 @@ body {
     padding: 0 10px;
 }
 
+
 .timeline-line-bg {
     position: absolute;
     top: 20px;
@@ -397,12 +282,14 @@ body {
     z-index: 1;
 }
 
+
 .timeline-line-fill {
     height: 100%;
     width: 0%;
     background: var(--hospital-teal);
     transition: width 0.4s ease;
 }
+
 
 .step-node {
     position: relative;
@@ -418,9 +305,11 @@ body {
     transition: all 0.3s ease;
 }
 
+
 .step-node .node-icon {
     font-size: 16px;
 }
+
 
 .step-node .node-text {
     font-size: 13px;
@@ -428,21 +317,25 @@ body {
     color: var(--text-secondary);
 }
 
+
 .step-node.active {
     border-color: var(--hospital-teal);
     background: var(--card-bg);
     box-shadow: 0 0 0 4px rgba(13, 148, 136, 0.15);
 }
 
+
 .step-node.active .node-text {
     color: var(--hospital-teal);
 }
+
 
 /* Tab Viewport & Animations */
 .tab-viewport {
     position: relative;
     overflow: hidden;
 }
+
 
 .tab-pane {
     display: none;
@@ -451,11 +344,13 @@ body {
     transition: opacity 0.35s ease, transform 0.35s ease;
 }
 
+
 .tab-pane.active {
     display: block;
     opacity: 1;
     transform: translateX(0);
 }
+
 
 .section-title {
     font-size: 14px;
@@ -468,15 +363,18 @@ body {
     border-bottom: 1px dashed var(--border-color);
 }
 
+
 .form-group { margin-bottom: 20px; }
 .form-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
 .form-grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; }
+
 
 @media (max-width: 640px) {
     .form-grid-2, .form-grid-3 { grid-template-columns: 1fr; }
     .timeline-stepper { flex-direction: column; gap: 12px; align-items: stretch; }
     .timeline-line-bg { display: none; }
 }
+
 
 label {
     display: block;
@@ -486,8 +384,10 @@ label {
     color: var(--text-primary);
 }
 
+
 .req { color: var(--alert-red); }
 .hint { font-size: 12px; color: var(--text-muted); margin-bottom: 8px; }
+
 
 /* Profile Photo Upload Styling */
 .avatar-upload-container {
@@ -500,6 +400,7 @@ label {
     border: 1px dashed var(--border-color);
     border-radius: var(--radius-md);
 }
+
 
 .avatar-preview-box {
     width: 80px;
@@ -514,16 +415,19 @@ label {
     flex-shrink: 0;
 }
 
+
 .avatar-preview-box img {
     width: 100%;
     height: 100%;
     object-fit: cover;
 }
 
+
 .avatar-initial {
     font-size: 32px;
     font-weight: 800;
 }
+
 
 .avatar-upload-controls {
     display: flex;
@@ -532,10 +436,12 @@ label {
     gap: 6px;
 }
 
+
 .hidden-file-input { display: none; }
 .btn-upload { cursor: pointer; display: inline-block; }
 .btn-text { background: none; border: none; font-size: 12px; cursor: pointer; padding: 0; text-decoration: underline; }
 .btn-text.danger { color: var(--alert-red); }
+
 
 /* Inputs & Animated Validation States */
 .modern-input, .modern-select, .modern-textarea {
@@ -549,6 +455,7 @@ label {
     transition: border-color 0.25s ease, box-shadow 0.25s ease;
 }
 
+
 .modern-select {
     appearance: none;
     background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2094a3b8' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
@@ -558,11 +465,13 @@ label {
     padding-right: 40px;
 }
 
+
 .modern-input:focus, .modern-select:focus, .modern-textarea:focus {
     outline: none;
     border-color: var(--hospital-indigo);
     box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
 }
+
 
 /* Validation Flash Animations */
 .valid-flash {
@@ -571,11 +480,13 @@ label {
     animation: flashPulse 0.4s ease-in-out;
 }
 
+
 .invalid-flash {
     border-color: var(--alert-red) !important;
     box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.2) !important;
     animation: shakePulse 0.3s ease-in-out;
 }
+
 
 @keyframes flashPulse {
     0% { transform: scale(1); }
@@ -583,16 +494,19 @@ label {
     100% { transform: scale(1); }
 }
 
+
 @keyframes shakePulse {
     0%, 100% { transform: translateX(0); }
     25% { transform: translateX(-4px); }
     75% { transform: translateX(4px); }
 }
 
+
 /* Quick Allergy Chips */
 .quick-pills-wrapper { margin-top: 10px; }
 .pills-label { font-size: 12px; color: var(--text-muted); display: block; margin-bottom: 6px; }
 .pills-container { display: flex; flex-wrap: wrap; gap: 8px; }
+
 
 .allergy-chip {
     background: var(--pill-bg);
@@ -606,13 +520,16 @@ label {
     transition: all 0.2s ease;
 }
 
+
 .allergy-chip:hover {
     background: var(--pill-hover);
     transform: translateY(-1px);
 }
 
+
 /* Medication Builder Rows */
 .medication-builder { display: flex; flex-direction: column; gap: 10px; margin-bottom: 12px; }
+
 
 .med-row {
     display: grid;
@@ -621,9 +538,11 @@ label {
     align-items: center;
 }
 
+
 @media (max-width: 640px) {
     .med-row { grid-template-columns: 1fr; }
 }
+
 
 .btn-icon {
     background: #f87171;
@@ -639,7 +558,9 @@ label {
     justify-content: center;
 }
 
+
 .btn-sm { padding: 8px 14px; font-size: 12px; }
+
 
 /* Action Buttons */
 .tab-actions {
@@ -649,8 +570,10 @@ label {
     display: flex;
 }
 
+
 .tab-actions.end { justify-content: flex-end; }
 .tab-actions.space-between { justify-content: space-between; }
+
 
 .btn-primary {
     background: var(--hospital-indigo);
@@ -664,7 +587,9 @@ label {
     transition: background 0.2s;
 }
 
+
 .btn-primary:hover { background: #1e40af; }
+
 
 .card-action-btn {
     width: 100%;
@@ -672,9 +597,11 @@ label {
     background: var(--hospital-teal);
 }
 
+
 .card-action-btn:hover {
     background: #0f766e;
 }
+
 
 .btn-secondary {
     background: var(--bg-workspace);
@@ -687,6 +614,7 @@ label {
     color: var(--text-primary);
 }
 
+
 .btn-success {
     background: var(--hospital-teal);
     color: #ffffff;
@@ -698,13 +626,16 @@ label {
     cursor: pointer;
 }
 
+
 /* Chart Sidebar */
 .chart-card { border-top: 5px solid var(--hospital-indigo); }
 .chart-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
 .chart-header h3 { font-size: 13px; font-weight: 800; color: var(--text-muted); }
 .mrn-badge { font-size: 12px; font-weight: 700; background: var(--bg-workspace); padding: 4px 8px; border-radius: 6px; border: 1px solid var(--border-color); }
 
+
 .chart-patient-header { display: flex; align-items: center; gap: 16px; }
+
 
 .patient-avatar-box {
     width: 56px;
@@ -714,7 +645,9 @@ label {
     flex-shrink: 0;
 }
 
+
 .chart-avatar-img { width: 100%; height: 100%; object-fit: cover; }
+
 
 .patient-avatar {
     width: 100%;
@@ -728,6 +661,7 @@ label {
     justify-content: center;
 }
 
+
 .patient-title-block h3 { font-size: 18px; color: var(--text-primary); }
 .patient-meta { font-size: 13px; color: var(--text-muted); }
 .chart-divider { height: 1px; background: var(--border-light); margin: 20px 0; }
@@ -738,7 +672,9 @@ label {
 .tag-container { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px; }
 .clinical-tag { background: rgba(13, 148, 136, 0.15); color: var(--hospital-teal); font-size: 12px; font-weight: 600; padding: 4px 10px; border-radius: 6px; }
 
+
 .meds-preview-list { display: flex; flex-direction: column; gap: 6px; }
+
 
 .med-pill-item {
     background: var(--bg-workspace);
@@ -748,15 +684,19 @@ label {
     font-size: 12px;
 }
 
+
 .med-pill-item strong { display: block; color: var(--text-primary); }
 .med-pill-item span { color: var(--text-muted); }
+
 
 .caregiver-alert-box { background: var(--bg-workspace); border-left: 4px solid var(--hospital-indigo); padding: 12px; border-radius: 6px; }
 .caregiver-name { font-weight: 700; font-size: 14px; }
 .caregiver-phone { font-size: 13px; color: var(--text-secondary); }
 .ehr-disclaimer { margin-top: 24px; border-top: 1px solid var(--border-light); padding-top: 14px; font-size: 12px; color: var(--text-muted); }
 
+
 .hidden { display: none !important; }
+
 
 /* Printable Patient Recovery ID Card Styles */
 .recovery-id-card {
@@ -771,6 +711,7 @@ label {
     margin: 20px auto;
 }
 
+
 .id-header {
     display: flex;
     justify-content: space-between;
@@ -780,21 +721,25 @@ label {
     margin-bottom: 14px;
 }
 
+
 .id-brand {
     display: flex;
     align-items: center;
     gap: 10px;
 }
 
+
 .id-brand h4 { font-size: 16px; font-weight: 800; color: #0f172a; }
 .id-brand small { font-size: 10px; color: #0d9488; font-weight: 700; letter-spacing: 0.5px; }
 .id-mrn { font-size: 12px; font-weight: 700; background: #f1f5f9; padding: 4px 8px; border-radius: 4px; }
+
 
 .id-body {
     display: flex;
     gap: 16px;
     align-items: flex-start;
 }
+
 
 .id-photo-box {
     width: 80px;
@@ -809,14 +754,17 @@ label {
     flex-shrink: 0;
 }
 
+
 .id-photo-box img { width: 100%; height: 100%; object-fit: cover; }
 .id-photo-letter { font-size: 32px; font-weight: 800; }
+
 
 .id-details { flex-grow: 1; }
 .id-details h3 { font-size: 18px; color: #0f172a; line-height: 1.2; }
 .id-sub-meta { font-size: 12px; color: #64748b; margin-bottom: 8px; }
 .id-field { font-size: 11px; margin-bottom: 4px; line-height: 1.3; }
 .text-danger { color: #dc2626; font-weight: 700; }
+
 
 .id-footer {
     border-top: 1px dashed #cbd5e1;
@@ -827,6 +775,7 @@ label {
     font-size: 10px;
     color: #64748b;
 }
+
 
 /* Print Specific Rules */
 @media print {
@@ -846,7 +795,7 @@ label {
     }
 }
 
+
 /* Feedback Messages */
 .alert-success { background: #dcfce7; color: var(--success-green); padding: 14px; border-radius: 8px; margin-top: 20px; font-size: 14px; font-weight: 600; border: 1px solid #bbf7d0; }
 .alert-warning { background: #fef3c7; color: #b45309; padding: 14px; border-radius: 8px; margin-top: 20px; font-size: 14px; font-weight: 600; border: 1px solid #fde68a; }
-

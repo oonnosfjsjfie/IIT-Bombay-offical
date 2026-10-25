@@ -2,6 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const profileForm = document.getElementById('profileForm');
     const messageArea = document.getElementById('messageArea');
 
+
     // Selectors
     const stepNodes = document.querySelectorAll('.step-node');
     const tabPanes = document.querySelectorAll('.tab-pane');
@@ -9,8 +10,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const progressPercent = document.getElementById('progressPercent');
     const timelineLineFill = document.getElementById('timelineLineFill');
 
+
     let currentLang = 'English';
     let base64ProfileImage = '';
+
 
     // Translation Dictionary
     const translations = {
@@ -102,13 +105,16 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
+
     initMRN();
     bindEvents();
     loadSavedProfile();
 
+
     function bindEvents() {
         // Theme Toggle
         document.getElementById('themeToggleBtn').addEventListener('click', toggleTheme);
+
 
         // Language Switcher
         document.getElementById('langToggleBtn').addEventListener('click', () => {
@@ -116,22 +122,27 @@ document.addEventListener('DOMContentLoaded', () => {
             applyLanguage(currentLang);
         });
 
+
         // Timeline Step Navigation
         stepNodes.forEach(node => {
             node.addEventListener('click', () => switchTab(node.dataset.tab));
         });
 
+
         document.querySelectorAll('.next-tab').forEach(btn => {
             btn.addEventListener('click', () => switchTab(btn.dataset.next));
         });
+
 
         document.querySelectorAll('.prev-tab').forEach(btn => {
             btn.addEventListener('click', () => switchTab(btn.dataset.prev));
         });
 
+
         // Image Upload
         document.getElementById('profilePicInput').addEventListener('change', handleImageUpload);
         document.getElementById('removePicBtn').addEventListener('click', removeProfilePhoto);
+
 
         // Quick Allergy Chips
         document.querySelectorAll('.allergy-chip').forEach(chip => {
@@ -148,8 +159,10 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
 
+
         // Medication Builder
         document.getElementById('addMedBtn').addEventListener('click', () => addMedicationRow());
+
 
         document.getElementById('medicationList').addEventListener('click', (e) => {
             if (e.target.classList.contains('remove-med-btn')) {
@@ -160,6 +173,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             }
         });
+
 
         // Real-time Input Validation & Progress Calculator
         const inputs = profileForm.querySelectorAll('input, select, textarea');
@@ -174,22 +188,27 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
 
+
         // Form Submission
         profileForm.addEventListener('submit', handleFormSubmit);
+
 
         // ID Card Print Buttons
         document.getElementById('printCardBtn').addEventListener('click', printEmergencyCard);
         document.getElementById('sidePrintCardBtn').addEventListener('click', printEmergencyCard);
+
 
         // Header Utilities
         document.getElementById('printBtn').addEventListener('click', () => window.print());
         document.getElementById('resetBtn').addEventListener('click', handleReset);
     }
 
+
     // Input Validation
     function validateInput(field) {
         let isValid = true;
         const val = field.value.trim();
+
 
         if (field.hasAttribute('required') && !val) {
             isValid = false;
@@ -199,8 +218,10 @@ document.addEventListener('DOMContentLoaded', () => {
             isValid = false;
         }
 
+
         field.classList.remove('valid-flash', 'invalid-flash');
         void field.offsetWidth;
+
 
         if (isValid && val) {
             field.classList.add('valid-flash');
@@ -211,11 +232,13 @@ document.addEventListener('DOMContentLoaded', () => {
         return isValid;
     }
 
+
     // Tab Switcher
     function switchTab(targetId) {
         stepNodes.forEach((node, index) => {
             const isActive = node.dataset.tab === targetId;
             node.classList.toggle('active', isActive);
+
 
             if (isActive) {
                 const percent = (index / (stepNodes.length - 1)) * 100;
@@ -223,10 +246,12 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
 
+
         tabPanes.forEach(pane => {
             pane.classList.toggle('active', pane.id === targetId);
         });
     }
+
 
     // Progress Bar
     function updateProgressBar() {
@@ -236,6 +261,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const allergies = document.getElementById('allergies').value.trim();
         const condition = document.getElementById('conditions').value;
 
+
         let score = 0;
         if (patientName) score += 30;
         if (caregiverName) score += 30;
@@ -244,13 +270,16 @@ document.addEventListener('DOMContentLoaded', () => {
         if (condition !== 'None') score += 10;
         if (base64ProfileImage) score += 5;
 
+
         progressBarFill.style.width = `${score}%`;
         progressPercent.textContent = `${score}%`;
     }
 
+
     // Print Emergency Recovery ID Card
     function printEmergencyCard() {
         const data = collectFormData();
+
 
         document.getElementById('cardPatientName').textContent = (data.patientName || 'UNREGISTERED PATIENT').toUpperCase();
         document.getElementById('cardPatientMeta').textContent = `Age: ${data.age || '--'} | Gender: ${data.gender || '--'} | Blood: ${data.bloodGroup || '--'}`;
@@ -261,8 +290,10 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('cardLanguage').textContent = data.language;
         document.getElementById('cardMrn').textContent = data.mrn;
 
+
         const photoImg = document.getElementById('cardPhotoImg');
         const photoLetter = document.getElementById('cardPhotoLetter');
+
 
         if (data.profileImage) {
             photoImg.src = data.profileImage;
@@ -274,36 +305,45 @@ document.addEventListener('DOMContentLoaded', () => {
             photoLetter.textContent = data.patientName ? data.patientName.charAt(0).toUpperCase() : 'P';
         }
 
+
         const printableContainer = document.getElementById('printableCardContainer');
         printableContainer.classList.remove('hidden');
 
+
         window.print();
+
 
         setTimeout(() => {
             printableContainer.classList.add('hidden');
         }, 1000);
     }
 
+
     // Form Submit Handler
     function handleFormSubmit(e) {
         e.preventDefault();
 
+
         const patientName = document.getElementById('patientName');
         const caregiverName = document.getElementById('caregiverName');
 
+
         const isNameValid = validateInput(patientName);
         const isCaregiverValid = validateInput(caregiverName);
+
 
         if (!isNameValid || !isCaregiverValid) {
             messageArea.innerHTML = `<div class="alert-warning">⚠️ Validation Error: Please fill in mandatory patient and caregiver details correctly.</div>`;
             return;
         }
 
+
         const data = collectFormData();
         localStorage.setItem('neutrix_hospital_profile', JSON.stringify(data));
         messageArea.innerHTML = `<div class="alert-success">✓ Profile saved & synchronized successfully!</div>`;
         updateChartPreview(data);
     }
+
 
     // Dynamic Medication Builder
     function addMedicationRow(name = '', time = 'Morning (Breakfast)', dose = '') {
@@ -324,17 +364,21 @@ document.addEventListener('DOMContentLoaded', () => {
             <button type="button" class="btn-icon remove-med-btn" title="Remove Prescription">✕</button>
         `;
 
+
         row.querySelectorAll('input, select').forEach(elem => {
             elem.addEventListener('input', syncFormState);
             elem.addEventListener('change', syncFormState);
         });
 
+
         medList.appendChild(row);
     }
+
 
     function collectFormData() {
         const medRows = document.querySelectorAll('.med-row');
         const medications = [];
+
 
         medRows.forEach(row => {
             const name = row.querySelector('.med-name').value.trim();
@@ -344,6 +388,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 medications.push({ name, time, dose: dose || 'Standard' });
             }
         });
+
 
         return {
             patientName: document.getElementById('patientName').value.trim(),
@@ -361,17 +406,21 @@ document.addEventListener('DOMContentLoaded', () => {
         };
     }
 
+
     function syncFormState() {
         updateProgressBar();
         updateChartPreview(collectFormData());
     }
 
+
     function updateChartPreview(data) {
         document.getElementById('prevName').textContent = data.patientName || 'Unregistered Patient';
         document.getElementById('prevMeta').textContent = `Age ${data.age || '--'} • Gender ${data.gender || '--'} • Blood ${data.bloodGroup || '--'}`;
 
+
         const avatarLetter = document.getElementById('avatarLetter');
         const chartAvatarImg = document.getElementById('chartAvatarImage');
+
 
         if (data.profileImage) {
             chartAvatarImg.src = data.profileImage;
@@ -383,11 +432,14 @@ document.addEventListener('DOMContentLoaded', () => {
             avatarLetter.textContent = data.patientName ? data.patientName.charAt(0).toUpperCase() : 'P';
         }
 
+
         document.getElementById('prevConditions').innerHTML = `<span class="clinical-tag">${data.condition || 'None'}</span>`;
         document.getElementById('prevAllergies').textContent = data.allergies;
 
+
         const medsContainer = document.getElementById('prevMedsContainer');
         medsContainer.innerHTML = '';
+
 
         if (data.medications && data.medications.length > 0) {
             data.medications.forEach(med => {
@@ -403,10 +455,12 @@ document.addEventListener('DOMContentLoaded', () => {
             medsContainer.innerHTML = '<p class="field-value">None reported</p>';
         }
 
+
         document.getElementById('prevCaregiver').textContent = data.caregiverName || 'Not Set';
         document.getElementById('prevPhone').textContent = data.caregiverPhone;
         document.getElementById('prevLang').textContent = data.language;
     }
+
 
     // Image Upload Handlers
     function handleImageUpload(e) {
@@ -430,6 +484,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+
     function removeProfilePhoto() {
         base64ProfileImage = '';
         document.getElementById('profilePicInput').value = '';
@@ -439,6 +494,7 @@ document.addEventListener('DOMContentLoaded', () => {
         syncFormState();
     }
 
+
     // Theme & Translation Helpers
     function toggleTheme() {
         const html = document.documentElement;
@@ -446,13 +502,16 @@ document.addEventListener('DOMContentLoaded', () => {
         const nextTheme = currentTheme === 'dark' ? 'light' : 'dark';
         html.setAttribute('data-theme', nextTheme);
 
+
         document.getElementById('themeIcon').textContent = nextTheme === 'dark' ? '☀️' : '🌙';
         document.getElementById('txt-theme').textContent = nextTheme === 'dark' ? 'Light Mode' : 'Dark Mode';
     }
 
+
     function applyLanguage(lang) {
         const dict = translations[lang];
         if (!dict) return;
+
 
         document.getElementById('txt-brand-title').textContent = dict.brandTitle;
         document.getElementById('txt-brand-sub').textContent = dict.brandSub;
@@ -496,6 +555,7 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('txt-lang-btn').textContent = lang === 'English' ? 'മലയാളം' : 'English';
     }
 
+
     function loadSavedProfile() {
         const saved = localStorage.getItem('neutrix_hospital_profile');
         if (saved) {
@@ -511,6 +571,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 document.getElementById('caregiverPhone').value = data.caregiverPhone === 'Not provided' ? '' : data.caregiverPhone;
                 document.getElementById('language').value = data.language || 'English';
 
+
                 if (data.profileImage) {
                     base64ProfileImage = data.profileImage;
                     const avatarImg = document.getElementById('avatarImage');
@@ -520,6 +581,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     document.getElementById('removePicBtn').classList.remove('hidden');
                 }
 
+
                 const medList = document.getElementById('medicationList');
                 medList.innerHTML = '';
                 if (data.medications && data.medications.length > 0) {
@@ -527,6 +589,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 } else {
                     addMedicationRow();
                 }
+
 
                 if (data.mrn) document.getElementById('mrnDisplay').textContent = data.mrn;
                 updateChartPreview(data);
@@ -539,10 +602,12 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+
     function initMRN() {
         const randomCode = Math.floor(10000 + Math.random() * 90000);
         document.getElementById('mrnDisplay').textContent = `MRN: #NX-${randomCode}`;
     }
+
 
     function handleReset() {
         if (confirm('Are you sure you want to reset this record? All unsubmitted entries will be lost.')) {
@@ -552,14 +617,17 @@ document.addEventListener('DOMContentLoaded', () => {
             messageArea.innerHTML = '';
             initMRN();
 
+
             const medList = document.getElementById('medicationList');
             medList.innerHTML = '';
             addMedicationRow();
+
 
             syncFormState();
             switchTab('tab-demographics');
         }
     }
+
 
     function escapeHtml(str) {
         return String(str)
@@ -570,3 +638,45 @@ document.addEventListener('DOMContentLoaded', () => {
             .replace(/'/g, "&#039;");
     }
 });
+// Locate the form submit listener at the bottom of frontend/profile.js and update it:
+document.getElementById('profileForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    // 1. DYNAMICALLY FORCE THE PERCENTAGE BAR TO HIT 100% UPON REGISTRATION SUCCESS
+    const progressBarFill = document.getElementById('timelineLineFill') || document.querySelector('div[style*="background: #0d6efd"]');
+    const progressPercentText = document.getElementById('progressPercent') || document.querySelector('span[id*="percent"]');
+    const stepNodes = document.querySelectorAll('.step-node, .step-item');
+
+    if (progressBarFill) progressBarFill.style.width = '100%';
+    if (progressPercentText) progressPercentText.innerText = '100%';
+    
+    // Highlight all nodes as completed green matching Adam's theme parameters
+    stepNodes.forEach(node => {
+        node.classList.add('completed');
+        node.style.background = '#198754';
+        node.style.color = '#ffffff';
+    });
+
+    // 2. EXTRACT LOGGED PASSWORDS AND STRINGS FOR VISUAL GREETINGS LATER
+    const patientNameInput = document.getElementById('patientName')?.value || "User";
+    localStorage.setItem('neutrix_patient_name', patientNameInput);
+
+    // Render success notifications cleanly inside Adam's feedback dashboard zone
+    const feedbackArea = document.getElementById('messageArea') || document.querySelector('.alert-success') || e.target.parentElement;
+    
+    // 3. IMMEDIATE REDIRECTION LINK BRIDGE TO YOUR DASHBOARD HUB
+    setTimeout(() => {
+        window.location.href = 'index.html'; // Pushes them straight to your main dashboard shell!
+    }, 1500);
+});
+
+// 4. SAFELY CAPTURE THE RIGHT HAND PRINT COMPONENT BUTTON CLICK REDIRECT AS WELL
+document.addEventListener('click', function(e) {
+    if (e.target && (e.target.id === 'printPatientEmergencyIdCard' || e.target.innerText.includes('Print Patient Emergency'))) {
+        e.preventDefault();
+        const patientNameInput = document.getElementById('patientName')?.value || "User";
+        localStorage.setItem('neutrix_patient_name', patientNameInput);
+        window.location.href = 'index.html';
+    }
+});
+
