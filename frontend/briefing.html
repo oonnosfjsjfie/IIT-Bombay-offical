@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Neutrix | Doctor Brief</title>
+    <link rel="stylesheet" href="tracker&briefing.css">
+</head>
+<body>
+    <!-- Professional Top Navigation Bar -->
+    <header class="site-header">
+        <div class="nav-container">
+            <div class="brand">
+                <span class="brand-icon">🏥</span>
+                <span class="brand-name">Neutrix</span>
+                <span class="brand-badge">Patient Portal</span>
+            </div>
+            <button id="themeToggleBtn" class="theme-toggle" onclick="
+                const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+                document.documentElement.setAttribute('data-theme', isDark ? 'light' : 'dark');
+                this.innerHTML = isDark ? '🌙 Dark Mode' : '☀️ Light Mode';
+            ">🌙 Dark Mode</button>        
+             <button id="langToggleBtn" class="theme-toggle" style="margin-right: 8px;" onclick="
+                const isEn = document.documentElement.lang === 'en';
+                document.documentElement.lang = isEn ? 'ml' : 'en';
+                this.innerHTML = isEn ? '🌐 മലയാളം' : '🌐 English';
+
+                const dict = {
+                    en: {
+                        badge: 'Patient Portal',
+                        h1: '🧑‍⚕️ Doctor Brief',
+                        caption: 'Prepare a clear, structured summary to share with the patient’s medical team.',
+                        outH3: 'Generated Doctor Message',
+                        outP: 'Review, copy, and send this structured message directly to your doctor.',
+                        cardH3: 'Clinical Summary Details',
+                        cardP: 'Provide details regarding current health conditions since discharge.',
+                        lbl1: 'Primary Medical Concern (Required)',
+                        ph1: 'What is the main reason for contacting the doctor today?',
+                        lbl2: 'New or Noticeable Symptoms',
+                        ph2: 'Describe any new changes, pain levels, or visual signs...',
+                        lbl3: 'Were recovery medicines taken exactly as advised?',
+                        lbl4: 'Specific Questions for the Doctor',
+                        ph4: 'List any queries about care adjustments, dosages, or side effects...',
+                        btn: 'Create Doctor Message',
+                        disc: '<strong>Medical Disclaimer:</strong> Neutrix is an informational system designed to assist patients in gathering and organizing clinical communication parameters. It does not formulate medical opinions, provide diagnoses, adjust prescriptions, or replace formal professional evaluations.'
+                    },
+                    ml: {
+                        badge: 'പേഷ്യന്റ് പോർട്ടൽ',
+                        h1: '🧑‍⚕️ ഡോക്ടർ ബ്രീഫ്',
+                        caption: 'രോഗിയുടെ മെഡിക്കൽ ടീമുമായി പങ്കിടുന്നതിന് വ്യക്തവും ഘടനാപരവുമായ ഒരു സംഗ്രഹം തയ്യാറാക്കുക.',
+                        outH3: 'തയ്യാറാക്കിയ ഡോക്ടർ സന്ദേശം',
+                        outP: 'ഈ സന്ദേശം പരിശോധിച്ച്, കോപ്പി ചെയ്ത് നിങ്ങളുടെ ഡോക്ടർക്ക് നേരിട്ട് അയക്കുക.',
+                        cardH3: 'ക്ലിനിക്കൽ സംഗ്രഹ വിവരങ്ങൾ',
+                        cardP: 'ഡിസ്ചാർജിന് ശേഷമുള്ള നിലവിലെ ആരോഗ്യസ്ഥിതിയെക്കുറിച്ചുള്ള വിവരങ്ങൾ നൽകുക.',
+                        lbl1: 'പ്രധാന മെഡിക്കൽ പ്രശ്നം (ആവശ്യമാണ്)',
+                        ph1: 'ഇന്ന് ഡോക്ടറെ ബന്ധപ്പെടുന്നതിനുള്ള പ്രധാന കാരണം എന്താണ്?',
+                        lbl2: 'പുതിയതോ ശ്രദ്ധയിൽപ്പെട്ടതോ ആയ ലക്ഷണങ്ങൾ',
+                        ph2: 'എന്തെങ്കിലും പുതിയ മാറ്റങ്ങൾ, വേദനയുടെ അളവ് അല്ലെങ്കിൽ മറ്റ് ലക്ഷണങ്ങൾ വിവരിക്കുക...',
+                        lbl3: 'നിർദ്ദേശിച്ച പ്രകാരം കൃത്യമായി മരുന്നുകൾ കഴിച്ചിരുന്നോ?',
+                        lbl4: 'ഡോക്ടറോടുള്ള പ്രത്യേക ചോദ്യങ്ങൾ',
+                        ph4: 'പരിചരണ മാറ്റങ്ങൾ, ഡോസേജുകൾ അല്ലെങ്കിൽ പാർശ്വഫലങ്ങൾ എന്നിവയെക്കുറിച്ചുള്ള ചോദ്യങ്ങൾ ഇവിടെ രേഖപ്പെടുത്തുക...',
+                        btn: 'ഡോക്ടർ സന്ദേശം തയ്യാറാക്കുക',
+                        disc: '<strong>മെഡിക്കൽ നിരാകരണം:</strong> രോഗികൾക്ക് ക്ലിനിക്കൽ ആശയവിനിമയ പാരാമീറ്ററുകൾ ശേഖരിക്കുന്നതിനും ക്രമീകരിക്കുന്നതിനും സഹായിക്കുന്നതിനായി രൂപകൽപ്പന ചെയ്‌തിരിക്കുന്ന ഒരു വിവരദായക സംവിധാനമാണ് ന്യൂട്രിക്സ്. ഇത് മെഡിക്കൽ അഭിപ്രായങ്ങൾ രൂപീകരിക്കുകയോ രോഗനിർണയം നടത്തുകയോ കുറിപ്പടികൾ ക്രമീകരിക്കുകയോ ഔപചാരികമായ പ്രൊഫഷണൽ വിലയിരുത്തലുകൾക്ക് പകരമാവുകയോ ചെയ്യുന്നില്ല.'
+                    }
+                };
+
+                const current = document.documentElement.lang;
+
+                document.querySelector('.brand-badge').innerText = dict[current].badge;
+                document.querySelector('.welcome-banner h1').innerText = dict[current].h1;
+                document.querySelector('.welcome-banner .caption').innerText = dict[current].caption;
+                document.querySelectorAll('#briefOutput').forEach(el => {
+                    const h3 = el.querySelector('h3');
+                    const p = el.querySelector('.card-subtitle');
+                    if(h3) h3.innerText = dict[current].outH3;
+                    if(p) p.innerText = dict[current].outP;
+                });
+                document.querySelector('.patient-card .card-header h3').innerText = dict[current].cardH3;
+                document.querySelector('.patient-card .card-header .card-subtitle').innerText = dict[current].cardP;
+
+                const formGroups = document.querySelectorAll('.patient-card .form-group');
+                formGroups[0].querySelector('label').innerHTML = dict[current].lbl1;
+                formGroups[0].querySelector('textarea').placeholder = dict[current].ph1;
+
+                formGroups[1].querySelector('label').innerText = dict[current].lbl2;
+                formGroups[1].querySelector('textarea').placeholder = dict[current].ph2;
+
+                document.querySelector('.choice-label').innerText = dict[current].lbl3;
+
+                formGroups[3].querySelector('label').innerText = dict[current].lbl4;
+                formGroups[3].querySelector('textarea').placeholder = dict[current].ph4;
+
+                document.querySelector('.btn-primary').innerText = dict[current].btn;
+                document.querySelector('.disclaimer p').innerHTML = dict[current].disc;
+            ">🌐 English</button>
+</div>
+    </header>
+
+    <!-- Main Dashboard Container -->
+    <main class="container">
+        <section class="welcome-banner">
+            <h1>🧑‍⚕️ Doctor Brief</h1>
+            <p class="caption">Prepare a clear, structured summary to share with the patient’s medical team.</p>
+        </section>
+
+        <!-- Dynamic Output Container (Stays hidden until form submission) -->
+        <div id="briefOutput" class="hidden summary-wrapper">
+            <div class="card-header" style="border-bottom: none; margin-bottom: 10px; padding-bottom: 0;">
+                <h3 class="summary-title" style="margin-top: 0;">Generated Doctor Message</h3>
+                <p class="card-subtitle">Review, copy, and send this structured message directly to your doctor.</p>
+            </div>
+            <textarea id="copyMessageArea" rows="10" style="font-family: inherit; margin-top: 10px;" readonly></textarea>
+            
+            <!-- Added Copy Button (Inherits visibility status of container parent element) -->
+            <button type="button" id="copyTextBtn" onclick="copyGeneratedMessage()" style="margin-top: 15px; display: block; padding: 10px 20px; font-weight: bold; cursor: pointer;">Copy Message</button>
+        </div>
+
+        <!-- Professional Form Layout -->
+        <form id="briefForm" class="patient-card">
+            <div class="card-header">
+                <h3>Clinical Summary Details</h3>
+                <p class="card-subtitle">Provide details regarding current health conditions since discharge.</p>
+            </div>
+
+            <div class="form-group full-width" style="margin-bottom: 20px;">
+                <label for="mainConcern">Primary Medical Concern <span class="field-hint">(Required)</span></label>
+                <textarea id="mainConcern" rows="3" placeholder="What is the main reason for contacting the doctor today?" required></textarea>
+            </div>
+
+            <div class="form-group full-width" style="margin-bottom: 20px;">
+                <label for="briefSymptoms">New or Noticeable Symptoms</label>
+                <textarea id="briefSymptoms" rows="3" placeholder="Describe any new changes, pain levels, or visual signs..."></textarea>
+            </div>
+
+            <div class="form-group full-width choice-group" style="margin-bottom: 20px;">
+                <label class="choice-label">Were recovery medicines taken exactly as advised?</label>
+                <div class="radio-flex">
+                    <label class="radio-tile">
+                        <input type="radio" name="briefMeds" value="Yes" checked>
+                        <span class="tile-label">Yes</span>
+                    </label>
+                    <label class="radio-tile">
+                        <input type="radio" name="briefMeds" value="No">
+                        <span class="tile-label">No</span>
+                    </label>
+                    <label class="radio-tile">
+                        <input type="radio" name="briefMeds" value="Partially">
+                        <span class="tile-label">Partially</span>
+                    </label>
+                </div>
+            </div>
+
+            <div class="form-group full-width" style="margin-bottom: 20px;">
+                <label for="questions">Specific Questions for the Doctor</label>
+                <textarea id="questions" rows="3" placeholder="List any queries about care adjustments, dosages, or side effects..."></textarea>
+            </div>
+
+            <div>
+                <button onclick="topFunction()" type="submit" class="btn-primary">Create Doctor Message</button>
+            </div>
+        
+        </form>
+       
+        <div id="briefOutput" class="hidden" style="margin-top:25px;" >
+            <h3>Doctor Message</h3>
+            
+            <textarea id="copyMessageArea" rows="10" class="btn-primary" readonly></textarea> 
+        </div>
+        <footer class="disclaimer" style="margin-top: 30px; border-top: 1px solid #dee2e6; padding-top: 15px; font-size: 13px; color: #6c757d;">
+            <p><em>Neutrix prepares communication for the doctor. It does not diagnose, prescribe, or replace medical advice.</em></p>
+        </footer>
+    </main>
+    <script src="tracker&briefing.js"></script>
+
+    <!-- Embedded Copy Routine Script Injection -->
+    <script>
+    function copyGeneratedMessage() {
+        const textTarget = document.getElementById("copyMessageArea");
+        const actBtn = document.getElementById("copyTextBtn");
+        
+        if (!textTarget || !textTarget.value) return;
+
+        textTarget.select();
+        textTarget.setSelectionRange(0, 99999); // Mobile compliance override
+
+        navigator.clipboard.writeText(textTarget.value).then(function() {
+            const defaultTxt = actBtn.innerText;
+            actBtn.innerText = "Copied!";
+            setTimeout(function() {
+                actBtn.innerText = defaultTxt;
+            }, 2000);
+        }).catch(function(err) {
+            console.error('Clipboard injection failure: ', err);
+        });
+    }
+    </script>
+  
+</body>
+</html>
