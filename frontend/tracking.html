@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Neutrix | Recovery Tracker</title>
+    <link rel="stylesheet" href="tracker&briefing.css">
+</head>
+<body>
+    <!-- Professional Top Navigation Bar -->
+    <header class="site-header">
+        <div class="nav-container">
+            <div class="brand">
+                <span class="brand-icon">🏥</span>
+                <span class="brand-name">Neutrix</span>
+                <span class="brand-badge">Patient Portal</span>
+            </div>
+            <button id="themeToggleBtn" class="theme-toggle" onclick="
+                const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+                document.documentElement.setAttribute('data-theme', isDark ? 'light' : 'dark');
+                this.innerHTML = isDark ? '🌙 Dark Mode' : '☀️ Light Mode';
+            ">🌙 Dark Mode</button>
+            <button id="langToggleBtn" class="theme-toggle" style="margin-right: 8px;" onclick="
+                const isEn = document.documentElement.lang === 'en';
+                document.documentElement.lang = isEn ? 'ml' : 'en';
+                this.innerHTML = isEn ? '🌐 മലയാളം' : '🌐 English';
+                const dict = {
+                    en: {
+                        badge: 'Patient Portal',
+                        h1: '📈 Recovery Tracker',
+                        caption: 'Record the patient’s health readings daily to assist your medical care team.',
+                        cardH3: 'Today’s Vitals & Readings',
+                        cardP: 'Fill in all available parameters below.',
+                        lblTemp: 'Temperature (°F)',
+                        lblBp: 'Blood Pressure <span class=\'field-hint\'>(e.g., 120/80)</span>',
+                        lblSugar: 'Blood Sugar (mg/dL)',
+                        lblWeight: 'Weight (kg)',
+                        lblSymptoms: 'New or Noticeable Symptoms <span class=\'field-hint\'>(e.g., chest pain, high fever, cough)</span>',
+                        phSymptoms: 'Describe any discomfort, changes, or unusual signs...',
+                        lblMeds: 'Did the patient take today’s prescribed medicines?',
+                        btn: 'Save Recovery Details',
+                        disc: '<strong>Medical Disclaimer:</strong> Neutrix is an informational tool designed to help organize home health tracking records. It does not provide medical diagnoses, clinical treatment plans, or replace direct consultations with qualified healthcare providers.'
+                    },
+                    ml: {
+                        badge: 'പേഷ്യന്റ് പോർട്ടൽ',
+                        h1: '📈 റിക്കവറി ട്രാക്കർ',
+                        caption: 'നിങ്ങളുടെ മെഡിക്കൽ കെയർ ടീമിനെ സഹായിക്കുന്നതിന് രോഗിയുടെ ആരോഗ്യ വിവരങ്ങൾ ദിവസവും രേഖപ്പെടുത്തുക.',
+                        cardH3: 'ഇന്നത്തെ വൈറ്റൽസും റീഡിംഗുകളും',
+                        cardP: 'താഴെ ലഭ്യമായ എല്ലാ വിവരങ്ങളും പൂരിപ്പിക്കുക.',
+                        lblTemp: 'താപനില (°F)',
+                        lblBp: 'രക്തസമ്മർദ്ദം <span class=\'field-hint\'>(e.g., 120/80)</span>',
+                        lblSugar: 'ബ്ലഡ് ഷുഗർ (mg/dL)',
+                        lblWeight: 'ശരീരഭാരം (kg)',
+                        lblSymptoms: 'പുതിയതോ ശ്രദ്ധയിൽപ്പെട്ടതോ ആയ ലക്ഷണങ്ങൾ <span class=\'field-hint\'>(e.g., നെഞ്ചുവേദന, കടുത്ത പനി, ചുമ)</span>',
+                        phSymptoms: 'എന്തെങ്കിലും അസ്വസ്ഥതകളോ മാറ്റങ്ങളോ അസാധാരണമായ ലക്ഷണങ്ങളോ വിവരിക്കുക...',
+                        lblMeds: 'രോഗി ഇന്ന് നിർദ്ദേശിച്ച മരുന്നുകൾ കഴിച്ചിരുന്നോ?',
+                        btn: 'വിവരങ്ങൾ സംരക്ഷിക്കുക',
+                        disc: '<strong>മെഡിക്കൽ നിരാകരണം:</strong> രോഗവിവരങ്ങൾ വീട്ടിൽ ട്രാക്ക് ചെയ്തു സൂക്ഷിക്കാൻ സഹായിക്കുന്ന ഒരു വിവരദായക സംവിധാനം മാത്രമാണ് ന്യൂട്രിക്സ്. ഇത് മെഡിക്കൽ രോഗനിർണ്ണയങ്ങളോ ക്ലിനിക്കൽ ചികിത്സാ പദ്ധതികളോ നൽകുന്നില്ല, കൂടാതെ യോഗ്യതയുള്ള ഒരു ആരോഗ്യ പരിരക്ഷാ ദാതാവുമായുള്ള നേരിട്ടുള്ള കൂടിയാലോചനകൾക്ക് പകരമാവുകയുമില്ല.'
+                    }
+                };
+
+                const current = document.documentElement.lang;
+
+                document.querySelector('.brand-badge').innerText = dict[current].badge;
+                document.querySelector('.welcome-banner h1').innerText = dict[current].h1;
+                document.querySelector('.welcome-banner .caption').innerText = dict[current].caption;
+                document.querySelector('.patient-card .card-header h3').innerText = dict[current].cardH3;
+                document.querySelector('.patient-card .card-header .card-subtitle').innerText = dict[current].cardP;
+
+                const groups = document.querySelectorAll('.form-group');
+                groups[0].querySelector('label').innerHTML = dict[current].lblTemp;
+                groups[1].querySelector('label').innerHTML = dict[current].lblBp;
+                groups[2].querySelector('label').innerHTML = dict[current].lblSugar;
+                groups[3].querySelector('label').innerHTML = dict[current].lblWeight;
+                groups[4].querySelector('label').innerHTML = dict[current].lblSymptoms;
+                
+                document.getElementById('trackerSymptoms').placeholder = dict[current].phSymptoms;
+                document.querySelector('.choice-label').innerText = dict[current].lblMeds;
+                document.getElementById('checkWarningBtn').innerText = dict[current].btn;
+                document.querySelector('.disclaimer p').innerHTML = dict[current].disc;
+            ">🌐 English</button>
+        </div>
+    </header>
+
+    <!-- Main Dashboard Container -->
+    <main class="container">
+        <section class="welcome-banner">
+            <h1>📈 Recovery Tracker</h1>
+            <p class="caption">Record the patient’s health readings daily to assist your medical care team.</p>
+        </section>
+
+        <!-- Dynamic Summary & Warning Output Containers -->
+        <div id="trackerSummary" class="hidden summary-wrapper"></div>
+        <div id="warningOutput" style="margin-top: 0; margin-bottom: 25px;"></div>
+
+        <!-- Professional Form Layout -->
+        <form id="recoveryForm" class="patient-card">
+            <div class="card-header">
+                <h3>Today’s Vitals & Readings</h3>
+                <p class="card-subtitle">Fill in all available parameters below.</p>
+            </div>
+
+            <div class="form-grid">
+                <div class="form-group">
+                    <label for="temp">Temperature (°F)</label>
+                    <input type="number" id="temp" step="0.1" min="90.0" max="110.0" value="98.6">
+                </div>
+
+                <div class="form-group">
+                    <label for="bp">Blood Pressure <span class="field-hint">(e.g., 120/80)</span></label>
+                    <input type="text" id="bp" placeholder="120/80">
+                </div>
+
+                <div class="form-group">
+                    <label for="sugar">Blood Sugar (mg/dL)</label>
+                    <input type="number" id="sugar" min="0" max="600" value="100">
+                </div>
+
+                <div class="form-group">
+                    <label for="weight">Weight (kg)</label>
+                    <input type="number" id="weight" step="0.1" min="0.0" max="300.0" value="60.0">
+                </div>
+            </div>
+
+            <div class="form-group full-width" style="margin-top: 20px;">
+                <label for="trackerSymptoms">New or Noticeable Symptoms <span class="field-hint">(e.g., chest pain, high fever, cough)</span></label>
+                <!-- Combined IDs smoothly to match both script expectations without styling variations -->
+                <textarea id="trackerSymptoms" data-secondary-id="symptomInput" rows="3" placeholder="Describe any discomfort, changes, or unusual signs..."></textarea>
+            </div>
+        
+            <div class="form-group full-width choice-group">
+                <label class="choice-label">Did the patient take today’s prescribed medicines?</label>
+                <div class="radio-flex">
+                    <label class="radio-tile">
+                        <input type="radio" name="medsRadio" value="Yes" checked>
+                        <span class="tile-label">Yes</span>
+                    </label>
+                    <label class="radio-tile">
+                        <input type="radio" name="medsRadio" value="No">
+                        <span class="tile-label">No</span>
+                    </label>
+                    <label class="radio-tile">
+                        <input type="radio" name="medsRadio" value="Partially">
+                        <span class="tile-label">Partially</span>
+                    </label>
+                </div>
+            </div>
+
+            <div class="form-actions">
+                <!-- Dual Action button processing: checks triage alerts first, then submits vital saves -->
+                <button onclick="topFunction()" id="checkWarningBtn" type="submit" class="btn-primary">Save Recovery Details</button>
+            </div>
+        </form>
+
+        <footer class="disclaimer">
+            <p><strong>Medical Disclaimer:</strong> Neutrix is an informational tool designed to help organize home health tracking records. It does not provide medical diagnoses, clinical treatment plans, or replace direct consultations with qualified healthcare providers.</p>
+        </footer>
+    </main>
+
+    <script src="tracker&briefing.js"></script>
+    <script>
+        // Dynamic JavaScript integration to hook the logic directly behind the button interaction
+        document.getElementById('recoveryForm').addEventListener('submit', function(e) {
+            // Keep a pointer setup so tracker.js elements matching 'symptomInput' lookups don't crash
+            const symptomsText = document.getElementById('trackerSymptoms').value;
+            
+            // Map triage trigger down to your warning check functions inside tracker.js if manually invoked
+            if (typeof checkWarningSigns === 'function') {
+                checkWarningSigns(symptomsText);
+            }
+        });
+    </script>
+</body>
+</html>
