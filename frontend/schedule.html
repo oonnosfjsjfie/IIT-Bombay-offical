@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Neutrix | My Medicine Schedule</title>
+    <link rel="stylesheet" href="theme.css">
+    <link rel="stylesheet" href="pages.css">
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/dompurify/dist/purify.min.js"></script>
+    <!-- PDF creation (works with Malayalam text too) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+</head>
+<body data-page="schedule" data-title-key="schedulePageTitle">
+
+    <nav class="ehr-navbar">
+        <div class="nav-container">
+            <div class="hospital-brand">
+                <div class="cross-icon">+</div>
+                <div class="brand-text">
+                    <span class="brand-title">NEUTRIX HEALTH</span>
+                    <span class="brand-sub" data-i18n="brandSub">Post-Discharge Patient Portal</span>
+                </div>
+            </div>
+            <div class="system-controls">
+                <a class="ctrl-btn nav-link hidden" data-nav="upload" href="summary.html" data-i18n="navUpload">🏠 Upload</a>
+                <a class="ctrl-btn nav-link hidden" data-nav="report" href="report.html" data-i18n="navReport">📋 Summary</a>
+                <a class="ctrl-btn nav-link hidden" data-nav="schedule" href="schedule.html" data-i18n="navSchedule">💊 My Schedule</a>
+                <button class="ctrl-btn" id="themeToggle" type="button">🌙 Dark Mode</button>
+                <button class="ctrl-btn" id="langToggle" type="button">🌐 മലയാളം</button>
+            </div>
+        </div>
+    </nav>
+
+    <main class="ehr-workspace">
+
+        <section class="ehr-card">
+
+            <div id="schedEmpty" class="empty-state hidden">
+                <div class="empty-icon">💊</div>
+                <h2 data-i18n="schedEmptyTitle"></h2>
+                <p data-i18n="schedEmptyText"></p>
+                <a href="report.html"><button class="btn-primary" type="button" data-i18n="schedEmptyBtn"></button></a>
+            </div>
+
+            <div id="schedView" class="hidden">
+                <div class="card-header">
+                    <div>
+                        <h2 data-i18n="schedTitle"></h2>
+                        <p class="subtitle" data-i18n="schedSubtitle"></p>
+                    </div>
+                    <span class="form-status" id="todayBadge"></span>
+                </div>
+
+                <div class="day-nav">
+                    <button id="prevDay" class="btn-secondary day-arrow" type="button">◀</button>
+                    <div class="day-label">
+                        <div id="dayLabel"></div>
+                        <span id="todayChip" class="clinical-tag" data-i18n="today"></span>
+                    </div>
+                    <button id="nextDay" class="btn-secondary day-arrow" type="button">▶</button>
+                </div>
+                <button id="jumpToday" class="btn-text hidden" type="button" data-i18n="goToday"></button>
+
+                <div class="progress-section">
+                    <div class="progress-info">
+                        <span data-i18n="progressLabel"></span>
+                        <span class="progress-percentage" id="progressCount"></span>
+                    </div>
+                    <div class="progress-bar-bg">
+                        <div class="progress-bar-fill" id="progressFill"></div>
+                    </div>
+                </div>
+
+                <div id="futureNote" class="alert-warning hidden" data-i18n="futureDay"></div>
+                <div id="doneBanner" class="alert-success hidden" data-i18n="doneAll"></div>
+
+                <div id="slotList"></div>
+
+                <!-- Intake report PDF -->
+                <div class="report-download">
+                    <p class="hint" data-i18n="downloadReportHint"></p>
+                    <button id="downloadReportBtn" class="btn-success action-btn" type="button" data-i18n="downloadReportBtn"></button>
+                    <p id="downloadStatus" class="hint" style="margin-top: 8px;"></p>
+                </div>
+            </div>
+        </section>
+
+        <aside class="ehr-card chart-card">
+            <div id="schedSide" class="hidden">
+                <div class="chart-header">
+                    <h3 data-i18n="weekTitle"></h3>
+                    <span class="mrn-badge">7</span>
+                </div>
+                <p class="hint" data-i18n="weekHint"></p>
+                <div id="weekStrip" class="week-strip"></div>
+
+                <div class="chart-divider"></div>
+
+                <div class="chart-header">
+                    <h3 data-i18n="sideMedsTitle"></h3>
+                </div>
+                <div id="medList" class="meds-preview-list"></div>
+
+                <div class="clinical-field" style="margin-top: 16px;">
+                    <span class="field-label" data-i18n="startedOn"></span>
+                    <div class="field-value" id="startedOn"></div>
+                </div>
+
+                <div class="chart-divider"></div>
+
+                <div class="link-box">
+                    <p class="hint" data-i18n="bookmarkHint"></p>
+                    <input id="pageLink" class="modern-input" readonly>
+                    <button id="copyLinkBtn" class="btn-primary" type="button" data-i18n="copyLink"></button>
+                    <p id="linkStatus" class="hint" style="margin-top: 8px;"></p>
+                </div>
+
+                <div class="chart-divider"></div>
+            </div>
+
+            <div class="caregiver-alert-box">
+                <div class="caregiver-name" data-i18n="labelTitle"></div>
+                <div class="caregiver-phone" data-i18n="labelText"></div>
+            </div>
+
+            <footer class="ehr-disclaimer">
+                <p data-i18n-html="notice"></p>
+            </footer>
+        </aside>
+
+    </main>
+
+    <script src="common.js"></script>
+    <script src="schedule.js"></script>
+    <script src="chat.js"></script>
+</body>
+</html>

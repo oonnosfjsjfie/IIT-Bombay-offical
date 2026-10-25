@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Neutrix | Your Summary</title>
+    <link rel="stylesheet" href="theme.css">
+    <link rel="stylesheet" href="pages.css">
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/dompurify/dist/purify.min.js"></script>
+    <style>
+        /* Compact scrolling boxes for long AI text */
+        .scroll-box {
+            max-height: 440px;
+            overflow-y: auto;
+            padding-right: 8px;
+        }
+        .summary-box { margin-top: 4px; }
+    </style>
+</head>
+<body data-page="report" data-title-key="reportPageTitle">
+
+    <nav class="ehr-navbar">
+        <div class="nav-container">
+            <div class="hospital-brand">
+                <div class="cross-icon">+</div>
+                <div class="brand-text">
+                    <span class="brand-title">NEUTRIX HEALTH</span>
+                    <span class="brand-sub" data-i18n="brandSub">Post-Discharge Patient Portal</span>
+                </div>
+            </div>
+            <div class="system-controls">
+                <a class="ctrl-btn nav-link hidden" data-nav="upload" href="summary.html" data-i18n="navUpload">🏠 Upload</a>
+                <a class="ctrl-btn nav-link hidden" data-nav="report" href="report.html" data-i18n="navReport">📋 Summary</a>
+                <a class="ctrl-btn nav-link hidden" data-nav="schedule" href="schedule.html" data-i18n="navSchedule">💊 My Schedule</a>
+                <button class="ctrl-btn" id="themeToggle" type="button">🌙 Dark Mode</button>
+                <button class="ctrl-btn" id="langToggle" type="button">🌐 മലയാളം</button>
+            </div>
+        </div>
+    </nav>
+
+    <main class="ehr-workspace">
+
+        <section class="ehr-card">
+
+            <div id="emptyView" class="empty-state hidden">
+                <div class="empty-icon">📄</div>
+                <h2 data-i18n="emptyTitle"></h2>
+                <p data-i18n="emptyText"></p>
+                <a href="summary.html"><button class="btn-primary" type="button" data-i18n="emptyBtn"></button></a>
+            </div>
+
+            <div id="reportView" class="hidden">
+                <div class="card-header">
+                    <div>
+                        <h2 data-i18n="reportTitle"></h2>
+                        <p class="subtitle" data-i18n="reportSubtitle"></p>
+                    </div>
+                    <span class="form-status" data-i18n="aiBadge"></span>
+                </div>
+
+                <!-- Summary in a compact scrolling box -->
+                <div class="output-block ai summary-box">
+                    <div id="reportSummary" class="output-text md-content scroll-box"></div>
+                </div>
+
+                <div class="section-title" style="margin-top: 36px;" data-i18n="nextSteps"></div>
+                <p class="hint" data-i18n="planHint"></p>
+
+                <div class="action-row">
+                    <button id="planBtn" class="btn-primary action-btn" type="button" data-i18n="planBtn"></button>
+                    <button id="checkupBtn" class="btn-success action-btn" type="button" data-i18n="checkupBtn"></button>
+                </div>
+
+                <!-- Medicine plan -->
+                <div id="planCard" class="output-block ai result-card hidden">
+                    <h3 class="block-title" data-i18n="planTitle"></h3>
+                    <div id="planContent" class="output-text md-content scroll-box"></div>
+
+                    <div id="planActions" class="plan-actions hidden">
+                        <p class="hint" data-i18n="scheduleHint"></p>
+                        <button id="scheduleBtn" class="btn-success action-btn" type="button" data-i18n="createScheduleBtn"></button>
+                        <p id="scheduleStatus" class="hint" style="margin-top: 8px;"></p>
+                    </div>
+                </div>
+
+                <!-- Check-ups -->
+                <div id="checkupCard" class="output-block ai result-card hidden">
+                    <h3 class="block-title" data-i18n="checkupTitle"></h3>
+                    <div id="checkupContent" class="output-text md-content scroll-box"></div>
+                </div>
+            </div>
+        </section>
+
+        <aside class="ehr-card chart-card">
+            <div class="chart-header">
+                <h3 data-i18n="detailsTitle"></h3>
+                <span class="mrn-badge">V1</span>
+            </div>
+
+            <div id="detailsBlock" class="hidden">
+                <div class="clinical-field">
+                    <span class="field-label" data-i18n="detailDischarge"></span>
+                    <div class="field-value" id="detailDischargeName"></div>
+                </div>
+                <div class="clinical-field">
+                    <span class="field-label" data-i18n="detailBill"></span>
+                    <div class="field-value" id="detailBillName"></div>
+                </div>
+                <div class="clinical-field">
+                    <span class="field-label" data-i18n="detailGenerated"></span>
+                    <div class="field-value" id="detailGeneratedOn"></div>
+                </div>
+                <div class="clinical-field">
+                    <span class="field-label" data-i18n="detailLanguage"></span>
+                    <div class="field-value highlight" id="detailLanguageValue"></div>
+                </div>
+                <div class="chart-divider"></div>
+            </div>
+
+            <div class="caregiver-alert-box">
+                <div class="caregiver-name" data-i18n="labelTitle"></div>
+                <div class="caregiver-phone" data-i18n="labelText"></div>
+            </div>
+
+            <a href="summary.html"><button class="btn-secondary back-btn" type="button" data-i18n="backBtn"></button></a>
+
+            <footer class="ehr-disclaimer">
+                <p data-i18n-html="notice"></p>
+            </footer>
+        </aside>
+
+    </main>
+
+    <script src="common.js"></script>
+    <script src="report.js"></script>
+    <script src="chat.js"></script>
+</body>
+</html>
