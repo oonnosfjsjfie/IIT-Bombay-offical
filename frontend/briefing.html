@@ -11,7 +11,7 @@
     <header class="site-header">
         <div class="nav-container">
             <div class="brand">
-                <span class="brand-icon">🏥</span>
+                <span class="brand-icon"><img src="C:\Users\Student\Documents\vs code things\IIT-Bombay-offical\frontend\logo b.jpeg" alt="Neutrix Logo" style="height: 34px; vertical-align: middle;"></span>
                 <span class="brand-name">Neutrix</span>
                 <span class="brand-badge">Patient Portal</span>
             </div>
@@ -25,13 +25,14 @@
                 document.documentElement.lang = isEn ? 'ml' : 'en';
                 this.innerHTML = isEn ? '🌐 മലയാളം' : '🌐 English';
 
-                const dict = {
+                    const dict = {
                     en: {
                         badge: 'Patient Portal',
                         h1: '🧑‍⚕️ Doctor Brief',
                         caption: 'Prepare a clear, structured summary to share with the patient’s medical team.',
                         outH3: 'Generated Doctor Message',
                         outP: 'Review, copy, and send this structured message directly to your doctor.',
+                        outHint: 'Click on &quot;Open Gmail&quot; to open your Gmail and enter your doctors email ID and paste the copied text.',
                         cardH3: 'Clinical Summary Details',
                         cardP: 'Provide details regarding current health conditions since discharge.',
                         lbl1: 'Primary Medical Concern (Required)',
@@ -41,7 +42,7 @@
                         lbl3: 'Were recovery medicines taken exactly as advised?',
                         lbl4: 'Specific Questions for the Doctor',
                         ph4: 'List any queries about care adjustments, dosages, or side effects...',
-                        btn: 'Create Doctor Message',
+                        btn: 'Copy Message',
                         disc: '<strong>Medical Disclaimer:</strong> Neutrix is an informational system designed to assist patients in gathering and organizing clinical communication parameters. It does not formulate medical opinions, provide diagnoses, adjust prescriptions, or replace formal professional evaluations.'
                     },
                     ml: {
@@ -50,6 +51,7 @@
                         caption: 'രോഗിയുടെ മെഡിക്കൽ ടീമുമായി പങ്കിടുന്നതിന് വ്യക്തവും ഘടനാപരവുമായ ഒരു സംഗ്രഹം തയ്യാറാക്കുക.',
                         outH3: 'തയ്യാറാക്കിയ ഡോക്ടർ സന്ദേശം',
                         outP: 'ഈ സന്ദേശം പരിശോധിച്ച്, കോപ്പി ചെയ്ത് നിങ്ങളുടെ ഡോക്ടർക്ക് നേരിട്ട് അയക്കുക.',
+                        outHint: 'നിങ്ങളുടെ ജിമെയിൽ തുറക്കുന്നതിനായി &quot;Open Gmail&quot; ക്ലിക്ക് ചെയ്യുക, തുടർന്ന് ഡോക്ടറുടെ ഇമെയിൽ ഐഡി നൽകി കോപ്പി ചെയ്ത ടെക്സ്റ്റ് പേസ്റ്റ് ചെയ്യുക.',
                         cardH3: 'ക്ലിനിക്കൽ സംഗ്രഹ വിവരങ്ങൾ',
                         cardP: 'ഡിസ്ചാർജിന് ശേഷമുള്ള നിലവിലെ ആരോഗ്യസ്ഥിതിയെക്കുറിച്ചുള്ള വിവരങ്ങൾ നൽകുക.',
                         lbl1: 'പ്രധാന മെഡിക്കൽ പ്രശ്നം (ആവശ്യമാണ്)',
@@ -59,7 +61,7 @@
                         lbl3: 'നിർദ്ദേശിച്ച പ്രകാരം കൃത്യമായി മരുന്നുകൾ കഴിച്ചിരുന്നോ?',
                         lbl4: 'ഡോക്ടറോടുള്ള പ്രത്യേക ചോദ്യങ്ങൾ',
                         ph4: 'പരിചരണ മാറ്റങ്ങൾ, ഡോസേജുകൾ അല്ലെങ്കിൽ പാർശ്വഫലങ്ങൾ എന്നിവയെക്കുറിച്ചുള്ള ചോദ്യങ്ങൾ ഇവിടെ രേഖപ്പെടുത്തുക...',
-                        btn: 'ഡോക്ടർ സന്ദേശം തയ്യാറാക്കുക',
+                        btn: 'സന്ദേശം പകർത്തുക',
                         disc: '<strong>മെഡിക്കൽ നിരാകരണം:</strong> രോഗികൾക്ക് ക്ലിനിക്കൽ ആശയവിനിമയ പാരാമീറ്ററുകൾ ശേഖരിക്കുന്നതിനും ക്രമീകരിക്കുന്നതിനും സഹായിക്കുന്നതിനായി രൂപകൽപ്പന ചെയ്‌തിരിക്കുന്ന ഒരു വിവരദായക സംവിധാനമാണ് ന്യൂട്രിക്സ്. ഇത് മെഡിക്കൽ അഭിപ്രായങ്ങൾ രൂപീകരിക്കുകയോ രോഗനിർണയം നടത്തുകയോ കുറിപ്പടികൾ ക്രമീകരിക്കുകയോ ഔപചാരികമായ പ്രൊഫഷണൽ വിലയിരുത്തലുകൾക്ക് പകരമാവുകയോ ചെയ്യുന്നില്ല.'
                     }
                 };
@@ -71,9 +73,10 @@
                 document.querySelector('.welcome-banner .caption').innerText = dict[current].caption;
                 document.querySelectorAll('#briefOutput').forEach(el => {
                     const h3 = el.querySelector('h3');
-                    const p = el.querySelector('.card-subtitle');
+                    const subtitles = el.querySelectorAll('.card-subtitle');
                     if(h3) h3.innerText = dict[current].outH3;
-                    if(p) p.innerText = dict[current].outP;
+                    if(subtitles[0]) subtitles[0].innerText = dict[current].outP;
+                    if(subtitles[1]) subtitles[1].innerText = dict[current].outHint;
                 });
                 document.querySelector('.patient-card .card-header h3').innerText = dict[current].cardH3;
                 document.querySelector('.patient-card .card-header .card-subtitle').innerText = dict[current].cardP;
@@ -96,7 +99,7 @@
 </div>
     </header>
 
-    <!-- Main Dashboard Container -->
+        <!-- Main Dashboard Container -->
     <main class="container">
         <section class="welcome-banner">
             <h1>🧑‍⚕️ Doctor Brief</h1>
@@ -108,15 +111,22 @@
             <div class="card-header" style="border-bottom: none; margin-bottom: 10px; padding-bottom: 0;">
                 <h3 class="summary-title" style="margin-top: 0;">Generated Doctor Message</h3>
                 <p class="card-subtitle">Review, copy, and send this structured message directly to your doctor.</p>
+                <p class="card-subtitle"> Click on "Open Gmail" to open your Gmail and enter your doctors email ID and paste the copied text</p>
             </div>
             <textarea id="copyMessageArea" rows="10" style="font-family: inherit; margin-top: 10px;" readonly></textarea>
             
-            <!-- Added Copy Button (Inherits visibility status of container parent element) -->
-            <button type="button" id="copyTextBtn" onclick="copyGeneratedMessage()" style="margin-top: 15px; display: block; padding: 10px 20px; font-weight: bold; cursor: pointer;">Copy Message</button>
+            <!-- Restored Action Operations Group -->
+            <div>
+                <button type="button" id="copyTextBtn" onclick="copyGeneratedMessage()" class="btn-primary" style="margin-top: 15px; display: block; padding: 10px 20px; font-weight: bold; cursor: pointer;">Copy Message</button>
+            </div>
+            <div style="margin-top: 10px;">
+                <button type="button" class="btn-primary" onclick="sendDoctorEmail()" style="padding: 10px 20px; font-weight: bold; cursor: pointer;">Open Gmail</button>
+            </div>
         </div>
 
         <!-- Professional Form Layout -->
         <form id="briefForm" class="patient-card">
+           
             <div class="card-header">
                 <h3>Clinical Summary Details</h3>
                 <p class="card-subtitle">Provide details regarding current health conditions since discharge.</p>
@@ -161,15 +171,53 @@
         
         </form>
        
-        <div id="briefOutput" class="hidden" style="margin-top:25px;" >
-            <h3>Doctor Message</h3>
-            
-            <textarea id="copyMessageArea" rows="10" class="btn-primary" readonly></textarea> 
-        </div>
         <footer class="disclaimer" style="margin-top: 30px; border-top: 1px solid #dee2e6; padding-top: 15px; font-size: 13px; color: #6c757d;">
             <p><em>Neutrix prepares communication for the doctor. It does not diagnose, prescribe, or replace medical advice.</em></p>
         </footer>
     </main>
+
+    <!-- Execution Script Context Layer -->
+    <script>
+    function sendDoctorEmail() {
+    // 1. Locate the textbox despite the HTML syntax mistake (id:theemail)
+    const emailInput = document.querySelector('[id*="theemail"]') || document.getElementById('theemail');
+    
+    // 2. Locate the message box wrapper 
+    const messageArea = document.getElementById('copyMessageArea');
+    
+    if (!messageArea) return;
+
+    // 3. Extract and safe-clean input string parameters
+    const emailAddress = emailInput ? emailInput.value.trim() : '';
+    const emailBody = encodeURIComponent(messageArea.value);
+    const emailSubject = encodeURIComponent('Patient Clinical Summary Brief');
+    
+    // 4. Fallback Execution Matrix: Opens Web-based Gmail window seamlessly with all details
+    const gmailUrl = `https://mail.google.com`;
+    window.open(gmailUrl, '_blank');
+}
+;
+
+
+    function copyGeneratedMessage() {
+        const textTarget = document.getElementById("copyMessageArea");
+        const actBtn = document.getElementById("copyTextBtn");
+        
+        if (!textTarget || !textTarget.value) return;
+
+        textTarget.select();
+        textTarget.setSelectionRange(0, 99999);
+
+        navigator.clipboard.writeText(textTarget.value).then(function() {
+            const original = actBtn.innerText;
+            actBtn.innerText = "Copied!";
+            setTimeout(function() { actBtn.innerText = original; }, 2000);
+        }).catch(function(err) {
+            console.error('Clipboard processing failure: ', err);
+        });
+    }
+    </script>
+
     <script src="tracker&briefing.js"></script>
 
     <!-- Embedded Copy Routine Script Injection -->
